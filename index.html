@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajav Resort - Premium Coastal Luxury Getaway</title>
+    <meta name="description" content="Experience coastal luxury at Rajav Resort. Enjoy unparalleled ocean views, premium amenities, exquisite dining, and unforgettable stays.">
+    <meta name="keywords" content="Rajav Resort, luxury resort, coastal hotel, oceanfront vacation, premium getaway, beach resort">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Rajav Resort - Coastal Luxury Getaway">
+    <meta property="og:description" content="Experience premium coastal luxury at Rajav Resort.">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://www.rajavresort.com">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Playfair Display for Headings, Outfit for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Flatpickr Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Resort",
+      "name": "Rajav Resort",
+      "image": "https://example.com/resort-exterior.jpg",
+      "description": "Experience coastal luxury at Rajav Resort with premium rooms, world-class amenities, and breathtaking ocean views.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Ocean Boulevard",
+        "addressLocality": "Cherai Beach",
+        "addressRegion": "Kerala",
+        "postalCode": "683514",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91-98765-43210",
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "priceRange": "$$$"
+    }
+    </script>
+</head>
+<body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="site-header" id="header">
+        <div class="container header-container">
+            <a href="#" class="brand-logo" aria-label="Rajav Resort Home">
+                <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                <span>Rajav Resort</span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav id="primary-nav" class="primary-nav">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#booking" class="btn btn-primary nav-cta">Book Your Stay</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="subtitle-wrapper">
+                    <span class="line"></span>
+                    <span class="hero-subtitle">Welcome to Paradise</span>
+                    <span class="line"></span>
+                </div>
+                <h1 class="hero-title">Discover Coastal Luxury <br><span class="italic-text">at Rajav Resort</span></h1>
+                <p class="hero-description">Immerse yourself in tranquility where the ocean meets pristine elegance. Experience a getaway crafted for perfection.</p>
+                <div class="hero-buttons">
+                    <a href="#rooms" class="btn btn-premium btn-premium-solid">Explore Rooms</a>
+                    <a href="#about" class="btn btn-premium">Discover More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Availability Widget -->
+        <div class="availability-widget-wrapper">
+            <div class="container">
+                <form class="availability-widget" id="homeBookingForm" novalidate>
+                    <div class="widget-group">
+                        <label for="check-in-home">Check-in</label>
+                        <div class="input-with-icon">
+                            <input type="date" id="check-in-home" name="checkIn" placeholder="Select Date" required aria-required="true">
+                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                    </div>
+                    <div class="widget-group">
+                        <label for="check-out-home">Check-out</label>
+                        <div class="input-with-icon">
+                            <input type="date" id="check-out-home" name="checkOut" placeholder="Select Date" required aria-required="true">
+                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                    </div>
+                    <div class="widget-group">
+                        <label for="guests-home">Guests</label>
+                        <select id="guests-home" name="guests" required aria-required="true">
+                            <option value="1">1 Adult</option>
+                            <option value="2" selected>2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                        </select>
+                    </div>
+                    <div class="widget-group">
+                        <button type="submit" class="btn btn-premium btn-premium-solid widget-btn">Check Availability</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- About Section -->
+        <section id="about" class="about-section section-padding">
+            <div class="container about-container">
+                <div class="about-image-wrapper">
+                    <div class="landscape-img loading-bg">
+                        <img src="about-story.jpg" alt="Rajav Resort Story" loading="lazy">
+                    </div>
+                    <div class="experience-badge">
+                        <span class="number">20+</span>
+                        <span class="text">Years of<br>Excellence</span>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">Our Story</span>
+                    <h2 class="section-title">A Sanctuary of Elegance and Serenity</h2>
+                    <p class="section-description">Nestled along the pristine coastline, Rajav Resort is more than a destination; it's an experience. We blend world-class luxury with the natural beauty of the ocean to create unforgettable moments for our guests.</p>
+                    <p class="section-description">From personalized service to exquisite dining and breathtaking views, every detail is designed with your ultimate comfort in mind.</p>
+                    <ul class="about-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Private Beach Access</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Award-winning Spa</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Fine Dining Restaurants</li>
+                    </ul>
+                    <a href="#amenities" class="btn btn-secondary">View All Amenities</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Section -->
+        <section id="rooms" class="rooms-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Accommodations</span>
+                    <h2 class="section-title">Premium Suites & Rooms</h2>
+                    <p class="section-subtitle">Retreat to your private sanctuary designed for ultimate relaxation.</p>
+                </div>
+
+                <div class="rooms-grid">
+                    <!-- Room 1: Premium Jacuzzi Bathtub Room (FEATURED) -->
+                    <article class="room-card-featured">
+                        <div class="featured-badge">Signature Suite</div>
+                        <div class="suite-image">
+                            <img src="room-jacuzzi.jpg" alt="Premium Jacuzzi Suite Room">
+                            <div class="suite-price">
+                                <span class="amount">₹12,000</span><span class="period">/night</span>
+                            </div>
+                        </div>
+                        <div class="suite-content">
+                            <h3 class="suite-title">Premium Jacuzzi Bathtub Room</h3>
+                            <p class="suite-desc">The ultimate luxury experience featuring a private jacuzzi, stunning beach views, and exclusive access.</p>
+                            <ul class="suite-features">
+                                <li><span>🛁</span> Jacuzzi Bathtub</li>
+                                <li><span>🏊</span> Infinity Pool Access</li>
+                                <li><span>🍳</span> Complimentary Breakfast</li>
+                                <li><span>🌊</span> Premium Beach View</li>
+                                <li><span>🏖️</span> Direct Beach Access</li>
+                            </ul>
+                            <a href="#booking" class="suite-book-btn">Book Now</a>
+                        </div>
+                    </article>
+
+                    <!-- Room 2: Premium Beach View Room -->
+                    <article class="room-card">
+                        <div class="room-img loading-bg">
+                            <img src="room-beach-view.jpg" alt="Premium Beach View Room" loading="lazy">
+                            <div class="room-price">
+                                <span class="amount">₹10,000</span><span class="period">/night</span>
+                            </div>
+                        </div>
+                        <div class="room-content">
+                            <h3 class="room-title">Premium Beach View Room</h3>
+                            <p class="room-desc">Wake up to the sound of waves in our premium room designed for ocean lovers.</p>
+                            <ul class="room-features">
+                                <li><span>🌊</span> Panoramic Beach View</li>
+                                <li><span>🏊</span> Infinity Pool Access</li>
+                                <li><span>🍳</span> Complimentary Breakfast</li>
+                                <li><span>🏖️</span> Direct Beach Access</li>
+                            </ul>
+                            <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
+                        </div>
+                    </article>
+
+                    <!-- Room 3: Medium Balcony Room -->
+                    <article class="room-card">
+                        <div class="room-img loading-bg">
+                            <img src="room-balcony.jpg" alt="Medium Balcony Room" loading="lazy">
+                            <div class="room-price">
+                                <span class="amount">₹5,000</span><span class="period">/night</span>
+                            </div>
+                        </div>
+                        <div class="room-content">
+                            <h3 class="room-title">Medium Balcony Room</h3>
+                            <p class="room-desc">A perfect balance of comfort and view, featuring a private balcony overlooking the scenic streetscape.</p>
+                            <ul class="room-features">
+                                <li><span>🌇</span> Street View Balcony</li>
+                                <li><span>🏊</span> Infinity Pool Access</li>
+                                <li><span>🏖️</span> Direct Beach Access</li>
+                                <li><span>🛏️</span> Queen Sized Bed</li>
+                            </ul>
+                            <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
+                        </div>
+                    </article>
+
+                    <!-- Room 4: Economy Room -->
+                    <article class="room-card">
+                        <div class="room-img loading-bg">
+                            <img src="room-economy.jpg" alt="Economy Room" loading="lazy">
+                            <div class="room-price">
+                                <span class="amount">₹3,000</span><span class="period">/night</span>
+                            </div>
+                        </div>
+                        <div class="room-content">
+                            <h3 class="room-title">Economy Room</h3>
+                            <p class="room-desc">Budget-friendly comfort without compromising on resort experiences.</p>
+                            <ul class="room-features">
+                                <li><span>🛏️</span> Cozy Non-Balcony Room</li>
+                                <li><span>🏊</span> Infinity Pool Access</li>
+                                <li><span>🏖️</span> Direct Beach Access</li>
+                                <li><span>📶</span> Free High-speed WiFi</li>
+                            </ul>
+                            <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Amenities Section -->
+        <section id="amenities" class="amenities-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Facilities</span>
+                    <h2 class="section-title">World-Class Amenities</h2>
+                    <p class="section-subtitle">Everything you need for an unforgettable coastal getaway.</p>
+                </div>
+
+                <div class="amenities-grid">
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🌊</div>
+                        <h3 class="amenity-title">Private Beach Access</h3>
+                        <p class="amenity-desc">Enjoy exclusive Cherai Beach frontage with private access and complimentary beach loungers for our guests.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🌅</div>
+                        <h3 class="amenity-title">Sunrise & Sunset Views</h3>
+                        <p class="amenity-desc">Experience breathtaking panoramic views of the horizon directly from your private room balcony.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🏊</div>
+                        <h3 class="amenity-title">Beachfront Pool</h3>
+                        <p class="amenity-desc">Our stunning pool is located right next to the beach, offering easy access to both the sand and the water.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🎉</div>
+                        <h3 class="amenity-title">Event & Party Hall</h3>
+                        <p class="amenity-desc">The perfect venue for your events, weddings, and celebrations with professional catering and support.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <div class="amenity-icon">☕</div>
+                        <h3 class="amenity-title">Complimentary Breakfast</h3>
+                        <p class="amenity-desc">Start your day right with a fresh, delicious breakfast included daily with your stay.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <div class="amenity-icon">🍹</div>
+                        <h3 class="amenity-title">Beachside Café</h3>
+                        <p class="amenity-desc">Savor tropical drinks, fresh coffee, and light snacks at our vibrant café right on the water's edge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking-section section-padding bg-primary text-white">
+            <div class="container booking-container">
+                <div class="booking-content">
+                    <h2 class="section-title text-white">Reserve Your Stay</h2>
+                    <p class="section-description text-white-80">Book directly with us for the best rates, complimentary upgrades (subject to availability), and flexible cancellation policies.</p>
+                </div>
+                <div class="booking-form-wrapper">
+                    <form class="booking-form" id="mainBookingForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="check-in">Check-in Date</label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="check-in" name="check-in" placeholder="Check-in Date" required aria-required="true">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="check-out">Check-out Date</label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="check-out" name="check-out" placeholder="Check-out Date" required aria-required="true">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guests">Guests</label>
+                                <select id="guests" name="guests" required aria-required="true">
+                                    <option value="" disabled selected>Select Guests</option>
+                                    <option value="1">1 Adult</option>
+                                    <option value="2">2 Adults</option>
+                                    <option value="3">2 Adults, 1 Child</option>
+                                    <option value="4">2 Adults, 2 Children</option>
+                                </select>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="room-type">Room Type</label>
+                                <select id="room-type" name="room-type" required aria-required="true">
+                                    <option value="" disabled selected>Select Room</option>
+                                    <option value="jacuzzi">Premium Jacuzzi Bathtub Room</option>
+                                    <option value="beach-view">Premium Beach View Room</option>
+                                    <option value="medium-balcony">Medium Balcony Room</option>
+                                    <option value="economy">Economy Room</option>
+                                </select>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary btn-block btn-large">Check Availability</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Visuals</span>
+                    <h2 class="section-title">Resort Gallery</h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1542314831-c53cd3816002?auto=format&fit=crop&q=80&w=800" alt="Resort entrance" loading="lazy">
+                    </div>
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=800" alt="Restaurant interior" loading="lazy">
+                    </div>
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800" alt="Beachfront loungers" loading="lazy">
+                    </div>
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&q=80&w=800" alt="Spa room" loading="lazy">
+                    </div>
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?auto=format&fit=crop&q=80&w=800" alt="Coastal view" loading="lazy">
+                    </div>
+                    <div class="gallery-item loading-bg">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=800" alt="Cocktails" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="testimonials-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Reviews</span>
+                    <h2 class="section-title">Guest Experiences</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"An absolutely magical experience. The ocean view suite was breathtaking, and the staff went above and beyond to make our anniversary special."</p>
+                        <div class="guest-info">
+                            <span class="guest-name">Sarah Jenkins</span>
+                            <span class="guest-location">New York, USA</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"The finest resort we've ever stayed at. The culinary offerings were divine, and the private beach felt like our own slice of heaven."</p>
+                        <div class="guest-info">
+                            <span class="guest-name">David & Emma</span>
+                            <span class="guest-location">London, UK</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Flawless from check-in to check-out. The infinity pool views are unmatched, and the spa treatment was the most relaxing I've ever had."</p>
+                        <div class="guest-info">
+                            <span class="guest-name">Michael Chang</span>
+                            <span class="guest-location">Singapore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="blog-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Journal</span>
+                    <h2 class="section-title">Latest Updates</h2>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-img loading-bg">
+                            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&q=80&w=800" alt="Local cuisine" loading="lazy">
+                            <div class="blog-date">May 12, 2026</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title"><a href="#">Exploring the Local Coastal Cuisine</a></h3>
+                            <p class="blog-excerpt">Discover the fresh seafood and unique flavors that inspire our resort's award-winning restaurant menu.</p>
+                            <a href="#" class="read-more">Read Article <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-img loading-bg">
+                            <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" alt="Wellness retreat" loading="lazy">
+                            <div class="blog-date">Apr 28, 2026</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title"><a href="#">The Ultimate Wellness Weekend Guide</a></h3>
+                            <p class="blog-excerpt">Unwind and recharge with our comprehensive guide to getting the most out of your spa resort stay.</p>
+                            <a href="#" class="read-more">Read Article <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-img loading-bg">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" alt="Beach activities" loading="lazy">
+                            <div class="blog-date">Apr 15, 2026</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title"><a href="#">Top 5 Water Activities at Rajav</a></h3>
+                            <p class="blog-excerpt">From paddleboarding at sunrise to snorkeling in the reefs, adventure awaits just steps from your room.</p>
+                            <a href="#" class="read-more">Read Article <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section section-padding bg-light">
+            <div class="container contact-container">
+                <div class="contact-info">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2 class="section-title">Contact Us</h2>
+                    <p class="section-description">Have a question or need assistance with your booking? Our dedicated team is here to help 24/7.</p>
+                    
+                    <ul class="contact-details">
+                        <li>
+                            <span class="icon">📍</span>
+                            <div>
+                                <strong>Address</strong>
+                                <p>123 Ocean Boulevard, Cherai Beach<br>Kerala 683514, India</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">📞</span>
+                            <div>
+                                <strong>Phone</strong>
+                                <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✉️</span>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:info@rajavresort.com">info@rajavresort.com</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required aria-required="true">
+                            <span class="error-msg" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                            <span class="error-msg" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required aria-required="true">
+                            <span class="error-msg" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                            <span class="error-msg" aria-live="polite"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-icon">🌊</span>
+                        Rajav Resort
+                    </a>
+                    <p class="footer-desc">Experience the pinnacle of coastal luxury. A perfect blend of natural beauty, refined elegance, and impeccable service.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">Fb</a>
+                        <a href="#" aria-label="Instagram">Ig</a>
+                        <a href="#" aria-label="Twitter">Tw</a>
+                        <a href="#" aria-label="LinkedIn">In</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">Our Story</a></li>
+                        <li><a href="#rooms">Accommodations</a></li>
+                        <li><a href="#amenities">Amenities & Spa</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#blog">Blog Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Booking Terms</a></li>
+                        <li><a href="#">Cancellation Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col newsletter-col">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe for exclusive offers and coastal inspiration.</p>
+                    <form class="newsletter-form" id="newsletterForm" novalidate>
+                        <input type="email" placeholder="Your email address" required aria-label="Email for newsletter">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rajav Resort. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+</body>
+</html>
