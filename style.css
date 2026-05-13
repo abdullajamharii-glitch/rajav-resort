@@ -1509,8 +1509,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     /* Fix Availability Widget on Mobile */
     .availability-widget-wrapper {
         margin-top: 0;
-        padding: 2rem var(--space-sm);
-        background-color: var(--clr-primary); /* Give it a solid background on mobile */
+        padding: 2.5rem var(--space-sm);
+        background: linear-gradient(180deg, #001a33 0%, var(--clr-primary) 100%);
+        border-top: 2px solid var(--clr-secondary); /* Premium gold accent line */
     }
 
     .availability-widget {
