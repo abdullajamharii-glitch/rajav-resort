@@ -3,18 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
        Calendar Availability Logic (Flatpickr)
        ========================================================================== */
     const scriptURL = 'https://script.google.com/macros/s/AKfycbx9H-jvX8iyoHuKkKte11WxP-vCtjjm0bWtfi9rJBRFdhk97XgunZBpG8LryM_c_FUr/exec';
-    let allDateCounts = {};
     
-    // Fetch booked dates from Google Script (Requires a doGet function in the script)
+    // Room Capacities (Made global for book-now.js)
+    window.roomCapacities = {
+        "jacuzzi": 1,
+        "beach-view": 1,
+        "medium-balcony": 2,
+        "economy": 2,
+        "total": 6
+    };
+
+    window.allDateCounts = {};
+    
+    // Fetch booked dates from Google Script
     fetch(scriptURL)
         .then(res => res.json())
         .then(dateCounts => {
-            allDateCounts = dateCounts;
+            window.allDateCounts = dateCounts;
             initCalendars(dateCounts);
         })
         .catch(err => {
-            console.warn("Could not fetch availability dates. Using mock data for demonstration.", err);
-            // Mock data for demonstration - using local timezone to match flatpickr
+            console.warn("Could not fetch availability dates. Using mock data.", err);
+            // Mock data for demonstration
             const today = new Date();
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
@@ -26,9 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `${year}-${month}-${day}`;
             };
 
+            // Enhanced Mock Data: 13th and 14th (relative to today) are fully booked
+            const d13 = new Date(); d13.setDate(13);
+            const d14 = new Date(); d14.setDate(14);
+
             allDateCounts = {
-                [formatDate(today)]: 5,
-                [formatDate(tomorrow)]: 5
+                [formatDate(d13)]: { "jacuzzi": 1, "beach-view": 1, "medium-balcony": 2, "economy": 2, "total": 6 },
+                [formatDate(d14)]: { "jacuzzi": 1, "beach-view": 1, "medium-balcony": 2, "economy": 2, "total": 6 }
             };
             initCalendars(allDateCounts);
         });
@@ -38,21 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
             minDate: "today",
             dateFormat: "Y-m-d",
             onDayCreate: function(dObj, dStr, fp, dayElem) {
-                // Adjust for timezone to get the correct YYYY-MM-DD local string
                 const localDate = new Date(dayElem.dateObj.getTime() - (dayElem.dateObj.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
                 
-                const count = dateCounts[localDate] || 0;
+                const data = dateCounts[localDate] || 0;
+                let isFullyBooked = false;
+
+                if (typeof data === 'number') {
+                    isFullyBooked = data >= roomCapacities.total;
+                } else if (typeof data === 'object') {
+                    // Check if total or all specific rooms are full
+                    isFullyBooked = data.total >= roomCapacities.total;
+                }
                 
-                // If more than 5 bookings, make it red, otherwise green
-                if (count >= 5) {
-                    dayElem.style.backgroundColor = 'rgba(220, 53, 69, 0.15)'; // Light red
+                if (isFullyBooked) {
+                    dayElem.style.backgroundColor = 'rgba(220, 53, 69, 0.15)'; 
                     dayElem.style.color = '#dc3545';
                     dayElem.style.fontWeight = 'bold';
                     dayElem.style.borderRadius = '4px';
-                    // Optional: uncomment below to completely disable booking on these dates
-                    // dayElem.classList.add('flatpickr-disabled');
                 } else {
-                    dayElem.style.backgroundColor = 'rgba(40, 167, 69, 0.15)'; // Light green
+                    dayElem.style.backgroundColor = 'rgba(40, 167, 69, 0.15)'; 
                     dayElem.style.color = '#28a745';
                     dayElem.style.fontWeight = 'bold';
                     dayElem.style.borderRadius = '4px';
@@ -176,12 +194,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
-            // Check for Room Full (Limit of 5)
+            // Check for Room Full (Granular Room Check)
             if (isValid && (formId === 'homeBookingForm' || formId === 'mainBookingForm')) {
                 const checkInInput = form.querySelector('input[name="checkIn"]') || form.querySelector('input[name="check-in"]');
-                if (checkInInput && allDateCounts[checkInInput.value] >= 5) {
-                    showFullModal();
-                    isValid = false;
+                const roomTypeSelect = form.querySelector('select[name="roomType"]') || form.querySelector('select[name="room-type"]');
+                
+                if (checkInInput) {
+                    const dateData = allDateCounts[checkInInput.value];
+                    if (dateData) {
+                        const selectedRoom = roomTypeSelect ? roomTypeSelect.value : 'total';
+                        const capacity = roomCapacities[selectedRoom] || roomCapacities.total;
+                        const booked = (typeof dateData === 'number') ? dateData : (dateData[selectedRoom] || dateData['total'] || 0);
+
+                        if (booked >= capacity) {
+                            const roomName = roomTypeSelect ? roomTypeSelect.options[roomTypeSelect.selectedIndex].text : "resort";
+                            showFullModal(roomName);
+                            isValid = false;
+                        }
+                    }
                 }
             }
 
@@ -250,8 +280,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullModal = document.getElementById('full-modal');
     const closeButtons = document.querySelectorAll('.modal-close, .modal-btn-close');
 
-    function showFullModal() {
+    window.showFullModal = function(roomName = "resort") {
         if (!fullModal) return;
+        const modalTitle = fullModal.querySelector('.modal-title');
+        const modalBody = fullModal.querySelector('.modal-body p');
+        
+        if (modalTitle) modalTitle.textContent = "Fully Booked!";
+        if (modalBody) {
+            modalBody.textContent = `We're sorry, but the ${roomName} is already at full capacity for your selected date. Please choose a different date or another room type.`;
+        }
+        
         fullModal.classList.add('active');
         fullModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';

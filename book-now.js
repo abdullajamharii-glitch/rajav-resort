@@ -70,18 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Validate Check-in Capacity
-            // allDateCounts is available because we load script.js before this
-            if (isValid && typeof allDateCounts !== 'undefined') {
+            // Validate Check-in Capacity (Room Specific)
+            if (isValid && typeof window.allDateCounts !== 'undefined') {
                 const checkInInput = finalForm.querySelector('input[name="checkIn"]');
-                if (checkInInput && allDateCounts[checkInInput.value] >= 5) {
-                    const fullModal = document.getElementById('full-modal');
-                    if (fullModal) {
-                        fullModal.classList.add('active');
-                        fullModal.setAttribute('aria-hidden', 'false');
-                        document.body.style.overflow = 'hidden';
+                const roomTypeInput = finalForm.querySelector('select[name="roomType"]');
+                
+                if (checkInInput) {
+                    const dateData = window.allDateCounts[checkInInput.value];
+                    if (dateData) {
+                        const selectedRoom = roomTypeInput ? roomTypeInput.value : 'total';
+                        const capacities = window.roomCapacities || { total: 6 };
+                        const capacity = capacities[selectedRoom] || capacities.total;
+                        const booked = (typeof dateData === 'number') ? dateData : (dateData[selectedRoom] || dateData['total'] || 0);
+
+                        if (booked >= capacity) {
+                            const roomName = roomTypeInput ? roomTypeInput.options[roomTypeInput.selectedIndex].text : "resort";
+                            if (typeof window.showFullModal === 'function') {
+                                window.showFullModal(roomName);
+                            } else {
+                                alert(`Sorry, the ${roomName} is already full on this date. Please choose another date or room type.`);
+                            }
+                            isValid = false;
+                        }
                     }
-                    isValid = false;
                 }
             }
 
