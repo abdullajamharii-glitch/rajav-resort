@@ -3,16 +3,34 @@ document.addEventListener('DOMContentLoaded', () => {
        Calendar Availability Logic (Flatpickr)
        ========================================================================== */
     const scriptURL = 'https://script.google.com/macros/s/AKfycbx9H-jvX8iyoHuKkKte11WxP-vCtjjm0bWtfi9rJBRFdhk97XgunZBpG8LryM_c_FUr/exec';
+    let allDateCounts = {};
     
     // Fetch booked dates from Google Script (Requires a doGet function in the script)
     fetch(scriptURL)
         .then(res => res.json())
         .then(dateCounts => {
+            allDateCounts = dateCounts;
             initCalendars(dateCounts);
         })
         .catch(err => {
-            console.warn("Could not fetch availability dates (doGet might not be set up). Falling back to all green.", err);
-            initCalendars({});
+            console.warn("Could not fetch availability dates. Using mock data for demonstration.", err);
+            // Mock data for demonstration - using local timezone to match flatpickr
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            allDateCounts = {
+                [formatDate(today)]: 5,
+                [formatDate(tomorrow)]: 5
+            };
+            initCalendars(allDateCounts);
         });
 
     function initCalendars(dateCounts) {
@@ -157,6 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+            
+            // Check for Room Full (Limit of 5)
+            if (isValid && (formId === 'homeBookingForm' || formId === 'mainBookingForm')) {
+                const checkInInput = form.querySelector('input[name="checkIn"]') || form.querySelector('input[name="check-in"]');
+                if (checkInInput && allDateCounts[checkInInput.value] >= 5) {
+                    showFullModal();
+                    isValid = false;
+                }
+            }
 
             if (isValid) {
                 // Determine which form it is
@@ -168,27 +195,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Google Sheets Web App URL (Replace with your actual URL later)
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbx9H-jvX8iyoHuKkKte11WxP-vCtjjm0bWtfi9rJBRFdhk97XgunZBpG8LryM_c_FUr/exec';
                 
-                // If it's the home widget or main booking form, send to Google Sheets
+                // If it's the home widget or main booking form, redirect to Book Now page
                 if (formId === 'homeBookingForm' || formId === 'mainBookingForm') {
-                    const formData = new FormData(form);
-                    // Add an identifier
-                    formData.append('formType', formId);
+                    btn.textContent = 'Redirecting...';
                     
-                    fetch(scriptURL, { method: 'POST', body: formData })
-                        .then(response => {
-                            alert('Success! Your availability request has been sent to our team.');
-                            form.reset();
-                            btn.textContent = originalText;
-                            btn.disabled = false;
-                        })
-                        .catch(error => {
-                            console.error('Error!', error.message);
-                            // Fallback alert if URL is not set yet
-                            alert('Thank you! Note: Google Sheets URL is not connected yet, but the frontend works perfectly.');
-                            form.reset();
-                            btn.textContent = originalText;
-                            btn.disabled = false;
-                        });
+                    const formData = new FormData(form);
+                    const params = new URLSearchParams();
+                    
+                    // Normalize parameter names for the book-now page
+                    for (const [key, value] of formData.entries()) {
+                        if (key === 'check-in') params.append('checkIn', value);
+                        else if (key === 'check-out') params.append('checkOut', value);
+                        else if (key === 'room-type') params.append('roomType', value);
+                        else params.append(key, value);
+                    }
+                    
+                    window.location.href = `book-now.html?${params.toString()}`;
                 } else {
                     // Normal mock submission for contact/newsletter
                     setTimeout(() => {
@@ -221,6 +243,37 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFormValidation('mainBookingForm');
     setupFormValidation('contactForm');
     setupFormValidation('newsletterForm');
+
+    /* ==========================================================================
+       Modal Logic
+       ========================================================================== */
+    const fullModal = document.getElementById('full-modal');
+    const closeButtons = document.querySelectorAll('.modal-close, .modal-btn-close');
+
+    function showFullModal() {
+        if (!fullModal) return;
+        fullModal.classList.add('active');
+        fullModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullModal() {
+        if (!fullModal) return;
+        fullModal.classList.remove('active');
+        fullModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', closeFullModal);
+    });
+
+    // Close on overlay click
+    if (fullModal) {
+        fullModal.addEventListener('click', (e) => {
+            if (e.target === fullModal) closeFullModal();
+        });
+    }
 
     /* ==========================================================================
        Lazy Loading Background Removal (for image loading states)

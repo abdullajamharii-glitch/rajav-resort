@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=5">
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -590,7 +590,25 @@
         </div>
     </footer>
 
+    <!-- Full Booking Modal -->
+    <div id="full-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">⚠️</div>
+                <h3 class="modal-title">Fully Booked</h3>
+            </div>
+            <div class="modal-body">
+                <p>We're sorry, but all rooms are currently reserved for your selected dates. Please try selecting a different date range or contact our team for assistance.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modal-btn-close">Select Different Dates</button>
+                <a href="#contact" class="btn btn-outline modal-btn-contact">Contact Concierge</a>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>

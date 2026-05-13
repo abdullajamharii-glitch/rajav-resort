@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Booking | Rajav Resort</title>
+    
+    <!-- Google Fonts: Inter and Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Flatpickr Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body class="booking-page">
+    <!-- Header -->
+    <header class="site-header" id="header" style="background-color: var(--clr-primary);">
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" aria-label="Rajav Resort Home">
+                <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                <span>Rajav Resort</span>
+            </a>
+            <nav id="primary-nav" class="primary-nav">
+                <a href="index.html" class="btn btn-outline nav-cta">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" style="padding-top: 100px; background-color: var(--clr-primary);">
+        <section class="section-padding bg-primary text-white" style="min-height: calc(100vh - 100px);">
+            <div class="container" style="max-width: 800px; margin: 0 auto;">
+                
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <span class="section-tag">Reservation</span>
+                    <h1 class="section-title text-white">Complete Your Booking</h1>
+                    <p class="section-description text-white-80">Please provide your details below to finalize your stay at Rajav Resort.</p>
+                </div>
+                
+                <div class="booking-form-wrapper">
+                    <form class="booking-form" id="finalBookingForm" novalidate>
+                        
+                        <h3 style="margin-bottom: 1.5rem; color: var(--clr-accent); font-family: var(--ff-serif); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="First Name" required aria-required="true">
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required aria-required="true">
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Email Address" required aria-required="true">
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required aria-required="true">
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; color: var(--clr-accent); font-family: var(--ff-serif); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">Stay Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="check-in">Check-in Date</label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="check-in" name="checkIn" placeholder="Check-in Date" required aria-required="true">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="check-out">Check-out Date</label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="check-out" name="checkOut" placeholder="Check-out Date" required aria-required="true">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guests">Guests</label>
+                                <select id="guests" name="guests" required aria-required="true">
+                                    <option value="" disabled selected>Select Guests</option>
+                                    <option value="1">1 Adult</option>
+                                    <option value="2">2 Adults</option>
+                                    <option value="3">3 Adults</option>
+                                    <option value="4">4 Adults</option>
+                                </select>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="room-type">Room Type</label>
+                                <select id="room-type" name="roomType" required aria-required="true">
+                                    <option value="" disabled selected>Select Room</option>
+                                    <option value="jacuzzi">Premium Jacuzzi Bathtub Room</option>
+                                    <option value="beach-view">Premium Beach View Room</option>
+                                    <option value="medium-balcony">Medium Balcony Room</option>
+                                    <option value="economy">Economy Room</option>
+                                </select>
+                                <span class="error-msg" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="requests">Special Requests (Optional)</label>
+                            <textarea id="requests" name="requests" rows="4" placeholder="Any dietary requirements, arrival time, etc." style="width: 100%; background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--clr-white); border-radius: var(--radius-sm); padding: 0.8rem; font-family: inherit; font-size: 1rem; transition: var(--transition-fast);"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary btn-block btn-large" style="margin-top: 2rem;">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none;">
+                <p>&copy; 2026 Rajav Resort. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Full Booking Modal -->
+    <div id="full-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">⚠️</div>
+                <h3 class="modal-title">Fully Booked</h3>
+            </div>
+            <div class="modal-body">
+                <p>We're sorry, but all rooms are currently reserved for your selected dates. Please try selecting a different date range or contact our team for assistance.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modal-btn-close">Select Different Dates</button>
+                <a href="index.html#contact" class="btn btn-outline modal-btn-contact">Contact Concierge</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="success-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">✅</div>
+                <h3 class="modal-title" style="color: #28a745;">Booking Confirmed!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for choosing Rajav Resort! Your reservation request has been successfully submitted. Our team will contact you shortly to confirm your booking.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="index.html" class="btn btn-primary btn-block">Return to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js?v=4"></script>
+    <script src="book-now.js?v=4"></script>
+</body>
+</html>
