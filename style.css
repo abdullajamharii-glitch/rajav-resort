@@ -1508,8 +1508,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     /* Fix Availability Widget on Mobile */
     .availability-widget-wrapper {
-        margin-top: -50px;
-        padding: 0 var(--space-sm);
+        margin-top: 0;
+        padding: 2rem var(--space-sm);
+        background-color: var(--clr-primary); /* Give it a solid background on mobile */
     }
 
     .availability-widget {
