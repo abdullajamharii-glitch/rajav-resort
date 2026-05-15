@@ -17,8 +17,9 @@
     --clr-error: #dc3545;
     
     /* Typography */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Outfit', sans-serif;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Pinyon Script', cursive;
     
     /* Spacing */
     --space-xs: 0.5rem;
@@ -702,34 +703,84 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: brightness(1.05) contrast(1.1) saturate(1.2);
 }
 
-.experience-badge {
+.experience-badge.premium-badge {
     position: absolute;
     bottom: -1rem;
     right: -1rem;
     background: var(--clr-primary);
-    color: var(--clr-white);
-    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+    width: 115px;
+    height: 115px;
+    padding: 0.8rem;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 102, 204, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
 }
 
-.experience-badge .number {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
+.experience-badge.premium-badge:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
-.experience-badge .text {
-    font-size: 0.8rem;
+.badge-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    color: var(--clr-secondary);
+    animation: badgePulse 2s infinite;
+}
+
+.badge-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.badge-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.badge-tag {
+    font-size: 0.55rem;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.badge-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    line-height: 1.1;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--clr-white);
+}
+
+.badge-ring {
+    position: absolute;
+    inset: 5px;
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    border-radius: 50%;
+    animation: badgeRotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes badgePulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes badgeRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .about-content {
@@ -1068,7 +1119,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     border: 1px solid rgba(0, 102, 204, 0.08);
-    text-align: left; /* Modern left alignment */
+    text-align: left;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -1083,7 +1134,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     left: 0;
     width: 4px;
     height: 0;
-    background: var(--clr-secondary); /* Gold accent line */
+    background: var(--clr-secondary);
     transition: height 0.4s ease;
 }
 
@@ -1098,25 +1149,110 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .amenity-icon {
-    font-size: 2.2rem;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(0, 102, 204, 0.05);
-    border-radius: 15px; /* Softer squared-circle look */
+    border-radius: 12px;
     color: var(--clr-primary);
     transition: all 0.4s ease;
 }
 
-.amenity-card:hover .amenity-icon {
-    background: var(--clr-secondary);
-    color: var(--clr-white);
-    transform: rotate(-5deg) scale(1.1);
+.amenity-icon svg {
+    width: 28px;
+    height: 28px;
 }
 
-.amenity-title {
+.amenity-card:hover .amenity-icon {
+    background: var(--clr-primary);
+    color: var(--clr-white);
+    transform: rotate(-5deg);
+}
+
+/* Testimonials Upgrades */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testimonial-card {
+    background: var(--clr-white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: var(--transition-normal);
+}
+
+.testimonial-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.testimonial-header {
+    margin-bottom: 0.5rem;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+    color: var(--clr-secondary);
+}
+
+.stars svg {
+    width: 18px;
+    height: 18px;
+}
+
+.testimonial-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--clr-text-main);
+    font-style: italic;
+    flex-grow: 1;
+}
+
+.guest-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 1.5rem;
+}
+
+.guest-avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--clr-primary-light);
+    color: var(--clr-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.guest-name {
+    display: block;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    font-size: 1rem;
+}
+
+.guest-location {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+}
     font-family: var(--font-heading);
     font-size: 1.4rem;
     color: var(--clr-text-main);

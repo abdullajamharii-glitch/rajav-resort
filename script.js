@@ -2,21 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        Calendar Availability Logic (Flatpickr)
        ========================================================================== */
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx9H-jvX8iyoHuKkKte11WxP-vCtjjm0bWtfi9rJBRFdhk97XgunZBpG8LryM_c_FUr/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyWNr2c4swsLv5hG9HbhFK0krRNdqWO1n5S5W4QD-6oaxX158Qo4a9O7UUdKghnwqXx/exec';
     
     // Room Capacities (Made global for book-now.js)
     window.roomCapacities = {
-        "jacuzzi": 1,
-        "beach-view": 1,
-        "medium-balcony": 2,
-        "economy": 2,
+        "Premium Jacuzzi Bathtub Room": 1,
+        "Premium Beach View Room": 1,
+        "Medium Balcony Room": 2,
+        "Economy Room": 2,
         "total": 6
     };
 
     window.allDateCounts = {};
     
-    // Fetch booked dates from Google Script
-    fetch(scriptURL)
+    // Fetch booked dates from Google Script (with cache-busting)
+    fetch(scriptURL + '?t=' + new Date().getTime())
         .then(res => res.json())
         .then(dateCounts => {
             window.allDateCounts = dateCounts;
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.disabled = true;
                 
                 // Google Sheets Web App URL (Replace with your actual URL later)
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbx9H-jvX8iyoHuKkKte11WxP-vCtjjm0bWtfi9rJBRFdhk97XgunZBpG8LryM_c_FUr/exec';
+                const targetURL = 'https://script.google.com/macros/s/AKfycbyWNr2c4swsLv5hG9HbhFK0krRNdqWO1n5S5W4QD-6oaxX158Qo4a9O7UUdKghnwqXx/exec';
                 
                 // If it's the home widget or main booking form, redirect to Book Now page
                 if (formId === 'homeBookingForm' || formId === 'mainBookingForm') {
