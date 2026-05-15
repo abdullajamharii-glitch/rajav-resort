@@ -367,7 +367,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     content: '';
     position: absolute;
     inset: -5%; /* Room for zooming */
-    background-image: url('hero-bg.jpg');
+    background-image: url('hero-bg.webp');
     background-size: cover;
     background-position: center;
     animation: cinematicZoom 25s ease-out infinite alternate;
