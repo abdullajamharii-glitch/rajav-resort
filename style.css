@@ -1908,3 +1908,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .faq-answer strong {
     color: var(--clr-text-main);
 }
+
+.modal-footer .btn-outline {
+    color: var(--clr-primary) !important;
+    border-color: var(--clr-primary) !important;
+}
+
+.modal-footer .btn-outline:hover {
+    background-color: var(--clr-primary) !important;
+    color: var(--clr-white) !important;
+}
