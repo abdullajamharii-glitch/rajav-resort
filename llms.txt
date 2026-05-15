@@ -1,0 +1,22 @@
+# Rajav Resort - Premium Coastal Luxury
+
+Rajav Resort is a high-end coastal getaway located in Cherai, Kochi, Kerala. It offers a blend of natural beauty, refined elegance, and modern luxury facilities.
+
+## Key Features
+- **Infinity Pool**: Stunning views of the Arabian Sea.
+- **Direct Beach Access**: Seamless access to the pristine sands of Cherai Beach.
+- **Accommodation**:
+    - **Premium Jacuzzi Suites**: Luxury rooms with private jacuzzis and beach views.
+    - **Premium Beach View Rooms**: Panoramic ocean views and luxury amenities.
+    - **Medium Balcony Rooms**: Comfortable stays with scenic streetscape balconies.
+    - **Economy Rooms**: Budget-friendly luxury with full resort access.
+- **Amenities**: High-speed WiFi, infinity pool, complimentary breakfast (premium), and secure parking.
+
+## Location
+- Address: Cherai Beach, Kochi, Kerala 683514, India.
+- Setting: Coastal beachfront property.
+
+## Booking Information
+- Real-time availability tracking for all room categories.
+- Secure online booking via the official website.
+- URL: https://rajav-resort-eight.vercel.app/
