@@ -242,28 +242,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     window.location.href = `book-now.html?${params.toString()}`;
                 } else {
-                    // Real submission for contact/newsletter to Google Sheets
-                    const formData = new FormData(form);
-                    // Add type for Google Script sorting
-                    formData.append('type', formId === 'contactForm' ? 'contact' : 'newsletter');
-                    
-                    fetch(scriptURL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        body: formData
-                    })
-                    .then(() => {
-                        alert('Thank you! Your message has been sent to Rajav Resort.');
+                    // Normal mock submission for contact/newsletter
+                    setTimeout(() => {
+                        alert('Thank you! Your request has been received.');
                         form.reset();
                         btn.textContent = originalText;
                         btn.disabled = false;
-                    })
-                    .catch(err => {
-                        console.error('Submission error:', err);
-                        alert('Something went wrong. Please try again or contact us directly.');
-                        btn.textContent = originalText;
-                        btn.disabled = false;
-                    });
+                    }, 1500);
                 }
             }
         });
