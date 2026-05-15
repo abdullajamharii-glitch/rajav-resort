@@ -19,8 +19,9 @@
     <!-- Canonical URL to prevent redirects -->
     <link rel="canonical" href="https://rajav-resort-eight.vercel.app">
 
-    <!-- Preload Critical Assets (LCP) -->
-    <link rel="preload" as="image" href="hero-bg.webp">
+    <!-- Preload Critical Assets (Responsive LCP) -->
+    <link rel="preload" as="image" href="hero-bg-mobile.webp" media="(max-width: 768px)">
+    <link rel="preload" as="image" href="hero-bg.webp" media="(min-width: 769px)">
 
     <!-- Preconnect to speed up connections -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -39,6 +40,16 @@
         .brand-logo{display:flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;font-family:var(--font-heading);font-size:1.5rem;font-weight:700}
         .brand-icon{width:28px;height:28px}
         .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;background:#000;color:#fff}
+        /* Responsive Hero Background */
+        .hero-section::before {
+            content: ''; position: absolute; inset: -5%; z-index: 0;
+            background-size: cover; background-position: center;
+            background-image: url('hero-bg-mobile.webp');
+            animation: cinematicZoom 25s ease-out infinite alternate;
+        }
+        @media (min-width: 769px) {
+            .hero-section::before { background-image: url('hero-bg.webp'); }
+        }
         .hero-title{font-family:var(--font-heading);font-size:clamp(2.2rem, 4vw, 4rem);line-height:1.2;margin-bottom:1.5rem}
     </style>
     
