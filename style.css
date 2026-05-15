@@ -1868,3 +1868,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         flex: 1;
     }
 }
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.faq-item {
+    background: var(--clr-white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--clr-primary);
+    font-weight: 600;
+}
+
+.faq-answer {
+    font-size: 0.95rem;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+}
+
+.faq-answer strong {
+    color: var(--clr-text-main);
+}
