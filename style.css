@@ -49,17 +49,17 @@
    ========================================================================== */
 :root {
     /* Colors */
-    --clr-primary: #0F172A; /* Sophisticated Midnight Navy */
-    --clr-primary-dark: #020617;
-    --clr-secondary: #C5A059; /* Rich Antique Gold */
-    --clr-secondary-dark: #A6862D;
-    --clr-accent: #0EA5E9; /* Oceanic Sky Blue for highlights */
-    --clr-text-main: #1E293B;
-    --clr-text-muted: #64748B;
-    --clr-bg: #F8FAFC; /* Softer, designer off-white */
+    --clr-primary: #0066CC;
+    --clr-primary-dark: #004d99;
+    --clr-primary-light: #e6f0fa;
+    --clr-secondary: #D4AF37; /* Gold/Sand Accent */
+    --clr-secondary-dark: #b5952f;
+    --clr-bg: #FFFFFF;
     --clr-bg-light: #f8fbff;
+    --clr-text-main: #333333;
+    --clr-text-muted: #666666;
     --clr-white: #FFFFFF;
-    --clr-black: #020617;
+    --clr-black: #000000;
     --clr-error: #dc3545;
     
     /* Typography */
