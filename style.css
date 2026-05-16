@@ -565,6 +565,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--clr-white);
     animation: bounce 2s infinite;
     z-index: 1;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .scroll-down-indicator {
+        display: block;
+    }
 }
 
 @keyframes bounce {
