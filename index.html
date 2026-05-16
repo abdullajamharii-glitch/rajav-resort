@@ -36,41 +36,9 @@
     <!-- Preconnect to speed up connections -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- Critical CSS: Inlined to prevent render blocking -->
-    <style>
-        :root {
-            --clr-primary: #0F172A; --clr-secondary: #C5A059; --clr-bg: #F8FAFC; --clr-white: #FFFFFF; --clr-black: #020617;
-            --font-heading: 'Cormorant Garamond', serif; --font-body: 'Inter', sans-serif;
-            --space-sm: 1rem; --space-md: 2rem; --space-xl: 6rem;
-        }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:var(--font-body);color:#333;background:var(--clr-bg);line-height:1.6;overflow-x:hidden}
-        .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--space-sm)}
-        .header{position:fixed;top:0;left:0;width:100%;padding:1.5rem 0;z-index:1000;transition:0.3s}
-        .brand-logo{display:flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;font-family:var(--font-heading);font-size:1.5rem;font-weight:700}
-        .brand-icon{width:28px;height:28px}
-        .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;background:#000;color:#fff}
-        /* Responsive Hero Background */
-        .hero-section::before {
-            content: ''; position: absolute; inset: -5%; z-index: 0;
-            background-size: cover; background-position: center;
-            background-image: url('hero-bg-mobile.webp');
-            animation: cinematicZoom 25s ease-out infinite alternate;
-        }
-        @media (min-width: 769px) {
-            .hero-section::before { background-image: url('hero-bg.webp'); }
-        }
-        .hero-title{font-family:var(--font-heading);font-size:clamp(2.2rem, 4vw, 4rem);line-height:1.2;margin-bottom:1.5rem}
-    </style>
-    
-    <!-- Deferred CSS: Non-critical styles loaded asynchronously -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="style.css?v=7" media="print" onload="this.media='all'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <link rel="stylesheet" href="style.css?v=7">
-    </noscript>
+    <!-- Stylesheets loaded synchronously to prevent FOUC -->
+    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
