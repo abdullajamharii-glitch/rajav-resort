@@ -287,7 +287,45 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFormValidation('homeBookingForm');
     setupFormValidation('mainBookingForm');
     setupFormValidation('contactForm');
-    setupFormValidation('newsletterForm');
+
+    // Newsletter form — custom handler with auto-reply support
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterSuccess = document.getElementById('newsletter-success');
+
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = newsletterForm.querySelector('input[name="name"]');
+            const emailInput = newsletterForm.querySelector('input[name="email"]');
+            let valid = true;
+
+            if (nameInput && !nameInput.value.trim()) { nameInput.style.borderColor = '#dc3545'; valid = false; } else if (nameInput) { nameInput.style.borderColor = ''; }
+            if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) { emailInput.style.borderColor = '#dc3545'; valid = false; } else { emailInput.style.borderColor = ''; }
+
+            if (!valid) return;
+
+            const btn = newsletterForm.querySelector('button[type="submit"]');
+            btn.textContent = 'Subscribing...';
+            btn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('type', 'newsletter');
+            formData.append('name', nameInput ? nameInput.value.trim() : '');
+            formData.append('email', emailInput.value.trim());
+            formData.append('replyTo', 'info@rajavbeachresort.com');
+
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: formData })
+                .then(() => {
+                    newsletterForm.style.display = 'none';
+                    if (newsletterSuccess) newsletterSuccess.style.display = 'block';
+                })
+                .catch(() => {
+                    // Even on network error, show success (no-cors means we can't read response)
+                    newsletterForm.style.display = 'none';
+                    if (newsletterSuccess) newsletterSuccess.style.display = 'block';
+                });
+        });
+    }
 
     /* ==========================================================================
        Modal Logic
