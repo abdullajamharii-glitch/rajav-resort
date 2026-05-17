@@ -19,4 +19,4 @@ Rajav Resort is a high-end coastal getaway located in Cherai, Kochi, Kerala. It 
 ## Booking Information
 - Real-time availability tracking for all room categories.
 - Secure online booking via the official website.
-- URL: https://rajav-resort-eight.vercel.app/
+- URL: https://www.rajavbeachresort.com/
