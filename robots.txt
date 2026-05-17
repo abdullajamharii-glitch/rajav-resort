@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.rajavresort.com/sitemap.xml
+Sitemap: https://www.rajavbeachresort.com/sitemap.xml
