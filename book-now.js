@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bookings.forEach(b => {
             if (now - b.ts > 86400000) return; // Ignore entries older than 24h
             if (!dateCounts[b.date]) {
-                dateCounts[b.date] = { total: 0, 'Premium Jacuzzi Bathtub Room': 0, 'Premium Beach View Room': 0, 'Medium Balcony Room': 0, 'Economy Room': 0 };
+                dateCounts[b.date] = { total: 0, 'Premium Jacuzzi Bathtub Room': 0, 'Premium Beach View Room': 0, 'Medium Balcony Room': 0, 'Economy Room': 0, 'Entire Resort Booking': 0 };
             }
             dateCounts[b.date]['total'] = (dateCounts[b.date]['total'] || 0) + 1;
             dateCounts[b.date][b.room] = (dateCounts[b.date][b.room] || 0) + 1;
@@ -132,32 +132,41 @@ document.addEventListener('DOMContentLoaded', () => {
                         const roomTypeInput = finalForm.querySelector('select[name="roomType"]');
                         
                         if (checkInInput) {
-                            const dateData = dateCounts[checkInInput.value] || {};
-                            const selectedRoom = roomTypeInput ? roomTypeInput.value : 'total';
-                            const capacities = window.roomCapacities || { total: 6 };
-                            const capacity = capacities[selectedRoom] || 1;
-                            const booked = dateData[selectedRoom] || 0;
+                             const dateData = dateCounts[checkInInput.value] || {};
+                             const selectedRoom = roomTypeInput ? roomTypeInput.value : 'total';
+                             const capacities = window.roomCapacities || { total: 6 };
+                             
+                             let isFull = false;
+                             if (dateData["Entire Resort Booking"] > 0) {
+                                 isFull = true;
+                             } else if (selectedRoom === "Entire Resort Booking" && (dateData.total > 0)) {
+                                 isFull = true;
+                             } else {
+                                 const capacity = capacities[selectedRoom] || 1;
+                                 const booked = dateData[selectedRoom] || 0;
+                                 isFull = booked >= capacity;
+                             }
 
-                            // Debug: log the comparison values
-                            console.log('=== AVAILABILITY CHECK ===');
-                            console.log('Date:', checkInInput.value);
-                            console.log('Selected Room:', selectedRoom);
-                            console.log('Date Data from Sheet:', JSON.stringify(dateData));
-                            console.log('Booked:', booked, '/ Capacity:', capacity);
-                            console.log('All dateCounts:', JSON.stringify(dateCounts));
+                             // Debug: log the comparison values
+                             console.log('=== AVAILABILITY CHECK ===');
+                             console.log('Date:', checkInInput.value);
+                             console.log('Selected Room:', selectedRoom);
+                             console.log('Date Data from Sheet:', JSON.stringify(dateData));
+                             console.log('Is Full:', isFull);
+                             console.log('All dateCounts:', JSON.stringify(dateCounts));
 
-                            if (booked >= capacity) {
-                                const roomName = roomTypeInput ? roomTypeInput.options[roomTypeInput.selectedIndex].text : "resort";
-                                if (typeof window.showFullModal === 'function') {
-                                    window.showFullModal(roomName);
-                                } else {
-                                    alert(`Sorry, the ${roomName} is already full on this date.`);
-                                }
-                                isValid = false;
-                                submitBtn.textContent = originalBtnText;
-                                submitBtn.disabled = false;
-                                return; // Stop here
-                            }
+                             if (isFull) {
+                                 const roomName = roomTypeInput ? roomTypeInput.options[roomTypeInput.selectedIndex].text : "resort";
+                                 if (typeof window.showFullModal === 'function') {
+                                     window.showFullModal(roomName);
+                                 } else {
+                                     alert(`Sorry, the ${roomName} is already full on this date.`);
+                                 }
+                                 isValid = false;
+                                 submitBtn.textContent = originalBtnText;
+                                 submitBtn.disabled = false;
+                                 return; // Stop here
+                             }
                         }
                     }
 

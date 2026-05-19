@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Premium Beach View Room": 1,
         "Medium Balcony Room": 2,
         "Economy Room": 2,
+        "Entire Resort Booking": 1,
         "total": 6
     };
 
@@ -60,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof data === 'number') {
                     isFullyBooked = data >= roomCapacities.total;
                 } else if (typeof data === 'object') {
-                    // Check if total or all specific rooms are full
-                    isFullyBooked = data.total >= roomCapacities.total;
+                    // Check if total or all specific rooms are full, or Entire Resort is booked
+                    isFullyBooked = data.total >= roomCapacities.total || data["Entire Resort Booking"] > 0;
                 }
                 
                 if (isFullyBooked) {
@@ -202,11 +203,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (checkInInput) {
                     const dateData = allDateCounts[checkInInput.value];
                     if (dateData) {
-                        const selectedRoom = roomTypeSelect ? roomTypeSelect.value : 'total';
-                        const capacity = roomCapacities[selectedRoom] || roomCapacities.total;
-                        const booked = (typeof dateData === 'number') ? dateData : (dateData[selectedRoom] || dateData['total'] || 0);
+                        const roomKeyMap = {
+                            'jacuzzi': 'Premium Jacuzzi Bathtub Room',
+                            'beach-view': 'Premium Beach View Room',
+                            'medium-balcony': 'Medium Balcony Room',
+                            'economy': 'Economy Room',
+                            'entire-resort': 'Entire Resort Booking'
+                        };
+                        const selectedRaw = roomTypeSelect ? roomTypeSelect.value : 'total';
+                        const selectedRoom = roomKeyMap[selectedRaw] || selectedRaw;
+                        
+                        let isFull = false;
+                        if (dateData["Entire Resort Booking"] > 0) {
+                            isFull = true;
+                        } else if (selectedRoom === "Entire Resort Booking" && (dateData.total > 0)) {
+                            isFull = true;
+                        } else {
+                            const capacity = roomCapacities[selectedRoom] || roomCapacities.total;
+                            const booked = (typeof dateData === 'number') ? dateData : (dateData[selectedRoom] || dateData['total'] || 0);
+                            isFull = booked >= capacity;
+                        }
 
-                        if (booked >= capacity) {
+                        if (isFull) {
                             const roomName = roomTypeSelect ? roomTypeSelect.options[roomTypeSelect.selectedIndex].text : "resort";
                             showFullModal(roomName);
                             isValid = false;

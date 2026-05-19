@@ -18,6 +18,7 @@ const ROOM_CAPACITIES = {
   "Premium Beach View Room": 1,
   "Medium Balcony Room": 2,
   "Economy Room": 2,
+  "Entire Resort Booking": 1,
   "total": 6
 };
 
@@ -154,6 +155,8 @@ function checkAvailabilityStrict(sheet, targetDate, targetRoom) {
   if (checkInIdx === -1 || roomTypeIdx === -1) return true; // Can't validate
   
   let bookedCount = 0;
+  let isEntireResortBooked = false;
+  let totalBookedCount = 0;
   
   for (let i = 1; i < data.length; i++) {
     let rowDate = data[i][checkInIdx];
@@ -168,9 +171,25 @@ function checkAvailabilityStrict(sheet, targetDate, targetRoom) {
       formattedDate = rowDate.toString().split('T')[0];
     }
     
-    if (formattedDate === targetDate && rowRoom === targetRoom) {
-      bookedCount++;
+    if (formattedDate === targetDate) {
+      if (rowRoom === "Entire Resort Booking") {
+        isEntireResortBooked = true;
+      }
+      if (rowRoom === targetRoom) {
+        bookedCount++;
+      }
+      totalBookedCount++;
     }
+  }
+  
+  // If Entire Resort is booked, no other room can be booked
+  if (isEntireResortBooked) {
+    return false;
+  }
+  
+  // If booking Entire Resort, no individual room must be booked
+  if (targetRoom === "Entire Resort Booking" && totalBookedCount > 0) {
+    return false;
   }
   
   const capacity = ROOM_CAPACITIES[targetRoom] || 1;
