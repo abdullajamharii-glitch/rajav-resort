@@ -1943,3 +1943,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         letter-spacing: 1px;
     }
 }
+
+/* ==========================================================================
+   Floating WhatsApp Button
+   ========================================================================== */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .floating-whatsapp {
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    .floating-whatsapp svg {
+        width: 28px;
+        height: 28px;
+    }
+}

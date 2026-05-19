@@ -171,16 +171,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const roomVal = finalForm.querySelector('select[name="roomType"]').value;
                         saveLocalBooking(checkInVal, roomVal);
 
-                        // Send data using no-cors (always works, no CORS block)
+                        // Send data
                         fetch(targetURL, {
                             method: 'POST',
-                            mode: 'no-cors',
                             body: queryString,
                             headers: { "Content-Type": "application/x-www-form-urlencoded" }
-                        }).catch(() => {}); // Ignore CORS errors silently
-
-                        // Show success after 2.5s (enough time for Google to save)
-                        setTimeout(() => {
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            submitBtn.textContent = originalBtnText;
+                            submitBtn.disabled = false;
+                            
+                            if (data.status === "BOOKING_FULL" || data.result === "error") {
+                                // The backend rejected it due to race condition
+                                const roomName = finalForm.querySelector('select[name="roomType"]').options[finalForm.querySelector('select[name="roomType"]').selectedIndex].text;
+                                if (typeof window.showFullModal === 'function') {
+                                    window.showFullModal(roomName);
+                                } else {
+                                    alert(`Sorry, the ${roomName} is already full on this date.`);
+                                }
+                            } else {
+                                // Success!
+                                if (successModal) {
+                                    successModal.classList.add('active');
+                                    successModal.setAttribute('aria-hidden', 'false');
+                                    document.body.style.overflow = 'hidden';
+                                }
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Booking submission error:", err);
+                            // Fallback success if network error but request went through
                             submitBtn.textContent = originalBtnText;
                             submitBtn.disabled = false;
                             if (successModal) {
@@ -188,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 successModal.setAttribute('aria-hidden', 'false');
                                 document.body.style.overflow = 'hidden';
                             }
-                        }, 2500);
+                        });
 
                     } else {
                         submitBtn.textContent = originalBtnText;
