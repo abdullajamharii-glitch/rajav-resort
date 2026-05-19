@@ -1950,7 +1950,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .floating-whatsapp {
     position: fixed;
     bottom: 30px;
-    left: 30px;
+    right: 30px;
     width: 60px;
     height: 60px;
     background-color: #25D366;
@@ -1975,7 +1975,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (max-width: 768px) {
     .floating-whatsapp {
         bottom: 20px;
-        left: 20px;
+        right: 20px;
         width: 50px;
         height: 50px;
     }
