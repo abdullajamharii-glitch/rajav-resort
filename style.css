@@ -622,7 +622,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .availability-widget {
     background: rgba(0, 0, 0, 0.4); /* Transparent dark tint for clear visibility */
     padding: 1.25rem 1.75rem; /* Increased for better presence */
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
     display: flex;
     flex-wrap: wrap;
