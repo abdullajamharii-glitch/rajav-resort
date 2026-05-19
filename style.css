@@ -1071,6 +1071,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
 }
 
 .room-card:hover {
@@ -1116,6 +1118,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .room-content {
     padding: 1rem 1.2rem; /* Tighter padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .room-title {
@@ -1148,6 +1153,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .room-card .btn {
     border-color: var(--clr-primary);
     color: var(--clr-primary);
+    margin-top: auto;
 }
 
 .room-card .btn:hover {
