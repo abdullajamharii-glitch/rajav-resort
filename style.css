@@ -521,7 +521,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: 1px solid rgba(255, 255, 255, 0.5);
     overflow: hidden;
     transition: all 0.4s ease;
-    border-radius: 0; /* Sharp corners for high-end luxury */
+    border-radius: var(--radius-full); /* Fully rounded pill shape */
 }
 
 .btn-premium::before {
