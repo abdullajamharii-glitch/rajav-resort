@@ -1983,6 +1983,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: scale(1.1);
 }
 
+.pool-img {
+    object-position: bottom;
+}
+
 @media (min-width: 768px) {
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
     .gallery-item:nth-child(4) { grid-column: span 2; }
