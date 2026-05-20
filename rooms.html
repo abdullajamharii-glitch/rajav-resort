@@ -165,7 +165,11 @@
             color: var(--clr-text-muted);
             margin-bottom: 1.5rem;
             font-size: 1.05rem;
-            line-height: 1.7;
+            line-height: 1.8;
+            border-left: 2px solid var(--clr-secondary);
+            padding-left: 1.2rem;
+            font-style: italic;
+            letter-spacing: 0.1px;
         }
         
         /* Specs Table */
@@ -331,6 +335,10 @@
         }
         
         @media (max-width: 768px) {
+            .rooms-hero {
+                min-height: 350px;
+                padding-top: 90px; /* Elegant buffer to push "Luxurious Stays" below fixed mobile navigation header */
+            }
             .room-row {
                 margin-bottom: 3.5rem;
             }
@@ -347,9 +355,19 @@
             .honeymoon-title {
                 font-size: 1.8rem;
             }
+            .room-text {
+                font-size: 0.98rem;
+                line-height: 1.7;
+                padding-left: 1rem;
+                border-left-width: 2px;
+            }
         }
         
         @media (max-width: 576px) {
+            .rooms-hero {
+                min-height: 320px;
+                padding-top: 100px; /* Extra spacing on very small screens to clear the header */
+            }
             .room-specs td:first-child {
                 width: 30%;
             }
@@ -363,6 +381,7 @@
                 font-size: 0.95rem;
                 margin-bottom: 1.2rem;
                 line-height: 1.6;
+                padding-left: 0.8rem;
             }
             .room-specs {
                 margin-bottom: 1rem;
