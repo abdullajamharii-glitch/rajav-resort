@@ -95,17 +95,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const primaryNav = document.getElementById('primary-nav');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    // Scroll Header
-    const handleScroll = () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    };
+    // Scroll Header (Optimized with IntersectionObserver to prevent forced reflow)
+    if (header) {
+        const sentinel = document.createElement('div');
+        sentinel.style.position = 'absolute';
+        sentinel.style.top = '0';
+        sentinel.style.left = '0';
+        sentinel.style.height = '50px';
+        sentinel.style.width = '1px';
+        sentinel.style.pointerEvents = 'none';
+        sentinel.style.visibility = 'hidden';
+        document.body.prepend(sentinel);
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Init
+        const headerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0
+        });
+
+        headerObserver.observe(sentinel);
+    }
 
     // Mobile Menu Toggle
     const toggleMenu = () => {
