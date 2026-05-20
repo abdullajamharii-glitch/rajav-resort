@@ -79,12 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        if (typeof flatpickr !== 'undefined') {
+        import('https://cdn.jsdelivr.net/npm/flatpickr/+esm').then(module => {
+            const flatpickr = module.default;
             flatpickr("#check-in-home", fpConfig);
             flatpickr("#check-out-home", fpConfig);
             flatpickr("#check-in", fpConfig); // Main form
             flatpickr("#check-out", fpConfig); // Main form
-        }
+        }).catch(err => console.error("Flatpickr failed to load", err));
     }
 
     /* ==========================================================================

@@ -72,17 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
         setInputValue('roomType', roomType);
         
         // Re-initialize flatpickr on these pre-filled dates
-        flatpickr("#check-in", {
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            defaultDate: checkIn
-        });
-        
-        flatpickr("#check-out", {
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            defaultDate: checkOut
-        });
+        import('https://cdn.jsdelivr.net/npm/flatpickr/+esm').then(module => {
+            const flatpickr = module.default;
+            flatpickr("#check-in", {
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                defaultDate: checkIn
+            });
+            
+            flatpickr("#check-out", {
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                defaultDate: checkOut
+            });
+        }).catch(err => console.error("Flatpickr failed to load", err));
 
         // Setup Form Validation and Submission
         finalForm.addEventListener('submit', (e) => {
