@@ -133,31 +133,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       Smooth Scrolling & Active Link Highlights
+       Smooth Scrolling & Active Link Highlights (Optimized with IntersectionObserver)
        ========================================================================== */
     const sections = document.querySelectorAll('section[id]');
     
-    // Active Link Highlighting
-    const highlightActiveLink = () => {
-        const scrollY = window.scrollY;
+    // Active Link Highlighting using IntersectionObserver
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Adjust to trigger when section is well within view
+        threshold: 0
+    };
 
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 100;
-            const sectionId = current.getAttribute('id');
-            const link = document.querySelector(`.nav-links a[href*=${sectionId}]`);
-            
-            if (link) {
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href*="#${sectionId}"]`);
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                
+                // Add active class to current link
+                if (link) {
                     link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
                 }
             }
         });
-    };
+    }, observerOptions);
 
-    window.addEventListener('scroll', highlightActiveLink);
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
 
     /* ==========================================================================
        Form Validation
