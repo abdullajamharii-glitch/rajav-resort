@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const finalForm = document.getElementById('finalBookingForm');
     const successModal = document.getElementById('success-modal');
+    const paymentModal = document.getElementById('payment-modal');
+    const confirmBookingBtn = document.getElementById('confirm-booking-btn');
 
     // ========== ROOM PRICES & UPI CONFIG ==========
     // UPDATE THIS UPI ID with your actual Google Pay / UPI ID
@@ -35,19 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateModalPayment(roomValue) {
+    function updatePaymentModal(roomValue) {
         const price = ROOM_PRICES[roomValue] || 0;
         const advance = Math.round(price / 2);
 
-        const modalRoomName = document.getElementById('modal-room-name');
-        const modalRoomRate = document.getElementById('modal-room-rate');
-        const modalAdvance = document.getElementById('modal-advance-amount');
+        const paymentRoomName = document.getElementById('payment-room-name');
+        const paymentRoomRate = document.getElementById('payment-room-rate');
+        const paymentAdvance = document.getElementById('payment-advance-amount');
         const gpayAmount = document.getElementById('gpay-amount');
         const gpayBtn = document.getElementById('gpay-btn');
 
-        if (modalRoomName) modalRoomName.textContent = roomValue;
-        if (modalRoomRate) modalRoomRate.textContent = formatINR(price);
-        if (modalAdvance) modalAdvance.textContent = formatINR(advance);
+        if (paymentRoomName) paymentRoomName.textContent = roomValue;
+        if (paymentRoomRate) paymentRoomRate.textContent = formatINR(price);
+        if (paymentAdvance) paymentAdvance.textContent = formatINR(advance);
         if (gpayAmount) gpayAmount.textContent = formatINR(advance);
 
         if (gpayBtn && advance > 0) {
@@ -55,9 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 + '&pn=' + encodeURIComponent(UPI_NAME)
                 + '&am=' + advance
                 + '&cu=INR'
-                + '&tn=' + encodeURIComponent('Advance Booking - ' + roomValue);
+                + '&tn=' + encodeURIComponent('Advance - ' + roomValue.substring(0, 15));
             gpayBtn.href = upiUrl;
         }
+    }
+
+    function updateSuccessModal(firstName, lastName, roomValue, checkIn, checkOut) {
+        const price = ROOM_PRICES[roomValue] || 0;
+        const advance = Math.round(price / 2);
+
+        const successGuestName = document.getElementById('success-guest-name');
+        const successRoomType = document.getElementById('success-room-type');
+        const successDates = document.getElementById('success-dates');
+        const successAdvancePaid = document.getElementById('success-advance-paid');
+
+        if (successGuestName) successGuestName.textContent = firstName + ' ' + lastName;
+        if (successRoomType) successRoomType.textContent = roomValue;
+        if (successDates) successDates.textContent = checkIn + ' to ' + checkOut;
+        if (successAdvancePaid) successAdvancePaid.textContent = formatINR(advance);
     }
 
     // Listen for room type changes to show price
@@ -244,64 +261,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     if (isValid) {
-                        submitBtn.textContent = 'Processing...';
-                        const formData = new FormData(finalForm);
-                        const queryString = new URLSearchParams(formData).toString();
-
-                        // Save booking locally so next check is instant
                         const checkInVal = finalForm.querySelector('input[name="checkIn"]').value;
                         const roomVal = finalForm.querySelector('select[name="roomType"]').value;
-                        saveLocalBooking(checkInVal, roomVal);
 
-                        // Send data
-                        fetch(targetURL, {
-                            method: 'POST',
-                            body: queryString,
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" }
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            submitBtn.textContent = originalBtnText;
-                            submitBtn.disabled = false;
-                            
-                            if (data.status === "BOOKING_FULL" || data.result === "error") {
-                                // The backend rejected it due to race condition
-                                const roomName = finalForm.querySelector('select[name="roomType"]').options[finalForm.querySelector('select[name="roomType"]').selectedIndex].text;
-                                if (typeof window.showFullModal === 'function') {
-                                    window.showFullModal(roomName);
-                                } else {
-                                    alert(`Sorry, the ${roomName} is already full on this date.`);
-                                }
-                            } else {
-                                // Success!
-                                if (successModal) {
-                                    // Update payment modal with selected room info
-                                    const selectedRoom = finalForm.querySelector('select[name="roomType"]');
-                                    if (selectedRoom) {
-                                        updateModalPayment(selectedRoom.value);
-                                    }
-                                    successModal.classList.add('active');
-                                    successModal.setAttribute('aria-hidden', 'false');
-                                    document.body.style.overflow = 'hidden';
-                                }
-                            }
-                        })
-                        .catch(err => {
-                            console.error("Booking submission error:", err);
-                            // Fallback success if network error but request went through
-                            submitBtn.textContent = originalBtnText;
-                            submitBtn.disabled = false;
-                            if (successModal) {
-                                const selectedRoom = finalForm.querySelector('select[name="roomType"]');
-                                if (selectedRoom) {
-                                    updateModalPayment(selectedRoom.value);
-                                }
-                                successModal.classList.add('active');
-                                successModal.setAttribute('aria-hidden', 'false');
-                                document.body.style.overflow = 'hidden';
-                            }
-                        });
+                        // Populate and open the payment modal
+                        updatePaymentModal(roomVal);
 
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+
+                        if (paymentModal) {
+                            paymentModal.classList.add('active');
+                            paymentModal.setAttribute('aria-hidden', 'false');
+                            document.body.style.overflow = 'hidden';
+                        }
                     } else {
                         submitBtn.textContent = originalBtnText;
                         submitBtn.disabled = false;
@@ -312,6 +285,83 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.textContent = originalBtnText;
                     submitBtn.disabled = false;
                 });
+        });
+    }
+
+    // Handle Payment Modal Booking Confirmation
+    if (confirmBookingBtn) {
+        confirmBookingBtn.addEventListener('click', () => {
+            const submitBtn = finalForm.querySelector('button[type="submit"]');
+            const originalConfirmBtnText = confirmBookingBtn.textContent;
+            
+            confirmBookingBtn.textContent = 'Confirming Booking...';
+            confirmBookingBtn.disabled = true;
+
+            const formData = new FormData(finalForm);
+            const queryString = new URLSearchParams(formData).toString();
+
+            const checkInVal = finalForm.querySelector('input[name="checkIn"]').value;
+            const roomVal = finalForm.querySelector('select[name="roomType"]').value;
+            const checkOutVal = finalForm.querySelector('input[name="checkOut"]').value;
+            const firstNameVal = finalForm.querySelector('input[name="firstName"]').value;
+            const lastNameVal = finalForm.querySelector('input[name="lastName"]').value;
+
+            // Save booking locally so next check is instant
+            saveLocalBooking(checkInVal, roomVal);
+
+            // Send data to Google Sheet
+            fetch(targetURL, {
+                method: 'POST',
+                body: queryString,
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())
+            .then(data => {
+                confirmBookingBtn.textContent = originalConfirmBtnText;
+                confirmBookingBtn.disabled = false;
+                
+                if (data.status === "BOOKING_FULL" || data.result === "error") {
+                    // The backend rejected it due to race condition
+                    if (paymentModal) {
+                        paymentModal.classList.remove('active');
+                        paymentModal.setAttribute('aria-hidden', 'true');
+                    }
+                    const roomName = finalForm.querySelector('select[name="roomType"]').options[finalForm.querySelector('select[name="roomType"]').selectedIndex].text;
+                    if (typeof window.showFullModal === 'function') {
+                        window.showFullModal(roomName);
+                    } else {
+                        alert(`Sorry, the ${roomName} is already full on this date.`);
+                    }
+                } else {
+                    // Success!
+                    if (paymentModal) {
+                        paymentModal.classList.remove('active');
+                        paymentModal.setAttribute('aria-hidden', 'true');
+                    }
+                    if (successModal) {
+                        updateSuccessModal(firstNameVal, lastNameVal, roomVal, checkInVal, checkOutVal);
+                        successModal.classList.add('active');
+                        successModal.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Booking submission error:", err);
+                // Fallback success if network error but request went through
+                confirmBookingBtn.textContent = originalConfirmBtnText;
+                confirmBookingBtn.disabled = false;
+                if (paymentModal) {
+                    paymentModal.classList.remove('active');
+                    paymentModal.setAttribute('aria-hidden', 'true');
+                }
+                if (successModal) {
+                    updateSuccessModal(firstNameVal, lastNameVal, roomVal, checkInVal, checkOutVal);
+                    successModal.classList.add('active');
+                    successModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
         });
     }
 
