@@ -124,30 +124,24 @@ document.addEventListener('DOMContentLoaded', () => {
         headerObserver.observe(sentinel);
     }
 
-    // Mobile Menu Toggle
-    const toggleMenu = () => {
-        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-        mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-        mobileMenuToggle.classList.toggle('active');
-        primaryNav.classList.toggle('active');
-        
-        if (!isExpanded) {
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu open
-        } else {
-            document.body.style.overflow = '';
-        }
-    };
+    // Mobile Menu Toggle — guarded so pages without a mobile nav don't crash
+    if (mobileMenuToggle && primaryNav) {
+        const toggleMenu = () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuToggle.classList.toggle('active');
+            primaryNav.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        };
 
-    mobileMenuToggle.addEventListener('click', toggleMenu);
+        mobileMenuToggle.addEventListener('click', toggleMenu);
 
-    // Close mobile menu on link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (primaryNav.classList.contains('active')) {
-                toggleMenu();
-            }
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (primaryNav.classList.contains('active')) toggleMenu();
+            });
         });
-    });
+    }
 
     /* ==========================================================================
        Smooth Scrolling & Active Link Highlights (Optimized with IntersectionObserver)

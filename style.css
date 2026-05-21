@@ -1789,18 +1789,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     backdrop-filter: blur(8px);
     z-index: 2000;
     display: flex;
-    align-items: center;
+    align-items: flex-start;     /* always start at top so scroll works */
     justify-content: center;
+    overflow-y: auto;            /* enable vertical scrolling on mobile */
+    -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+    padding: 2.5rem 1rem;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto; /* Support vertical scroll when content overflows */
-    padding: 2.5rem 1rem; /* Provide spacing around the modal on small viewports */
 }
 
-@media (max-height: 750px) or (max-width: 576px) {
+/* On larger screens center vertically */
+@media (min-height: 700px) {
     .modal-overlay {
-        align-items: flex-start; /* Prevent top/bottom clipping by aligning to flex-start */
+        align-items: center;
     }
 }
 
@@ -1812,7 +1814,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .modal-content {
     background-color: var(--clr-white);
     width: 90%;
-    max-width: 550px; /* Enhanced width for desktop visibility and premium feel */
+    max-width: 550px;
     padding: var(--space-md);
     border-radius: var(--radius-lg);
     position: relative;
@@ -1820,7 +1822,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: var(--shadow-lg);
     text-align: center;
-    margin: auto; /* Flexbox auto margins center elements and protect scrolling overflow boundaries */
+    margin: auto;  /* keep centered inside scrollable overlay */
+    flex-shrink: 0;
 }
 
 .modal-overlay.active .modal-content {
