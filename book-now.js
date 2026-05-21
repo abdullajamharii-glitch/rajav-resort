@@ -130,6 +130,24 @@ document.addEventListener('DOMContentLoaded', () => {
                       + `&tn=${encodeURIComponent('Advance - Rajav Resort')}`;
             gpayBtn.href = upi;
         }
+
+        // Reset UTR verification input and lock confirm button
+        const utrInput = $('upi-transaction-id');
+        if (utrInput) {
+            utrInput.value = '';
+            utrInput.style.borderColor = '#cbd5e1';
+        }
+        const checkMark = $('utr-check');
+        if (checkMark) checkMark.style.display = 'none';
+        const utrError = $('utr-error');
+        if (utrError) utrError.style.display = 'none';
+
+        const confirmBtn = $('confirm-booking-btn');
+        if (confirmBtn) {
+            confirmBtn.disabled = true;
+            confirmBtn.style.opacity = '0.5';
+            confirmBtn.style.cursor = 'not-allowed';
+        }
     }
 
     /* ==========================================================================
@@ -273,7 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const firstName   = finalForm.querySelector('[name="firstName"]').value;
             const lastName    = finalForm.querySelector('[name="lastName"]').value;
 
-            const body = new URLSearchParams(new FormData(finalForm)).toString();
+            const formData = new FormData(finalForm);
+            const transactionId = $('upi-transaction-id') ? $('upi-transaction-id').value.trim() : '';
+            formData.append('transactionId', transactionId);
+
+            const body = new URLSearchParams(formData).toString();
 
             try {
                 const res  = await fetch(SCRIPT_URL, {
@@ -299,6 +321,56 @@ document.addEventListener('DOMContentLoaded', () => {
             } finally {
                 confirmBookingBtn.textContent = origText;
                 confirmBookingBtn.disabled    = false;
+            }
+        });
+    }
+
+    /* ==========================================================================
+       UTR / TRANSACTION ID VALIDATION LISTENERS
+       ========================================================================== */
+    const utrInput = $('upi-transaction-id');
+    if (utrInput) {
+        utrInput.addEventListener('input', () => {
+            const val = utrInput.value.trim();
+            const isValidUTR = /^\d{12}$/.test(val);
+            const confirmBtn = $('confirm-booking-btn');
+            const checkMark = $('utr-check');
+            const utrError = $('utr-error');
+
+            if (isValidUTR) {
+                utrInput.style.borderColor = '#22c55e'; // Premium Green Border
+                if (checkMark) checkMark.style.display = 'block';
+                if (utrError) utrError.style.display = 'none';
+                if (confirmBtn) {
+                    confirmBtn.disabled = false;
+                    confirmBtn.style.opacity = '1';
+                    confirmBtn.style.cursor = 'pointer';
+                }
+            } else {
+                utrInput.style.borderColor = '#cbd5e1';
+                if (checkMark) checkMark.style.display = 'none';
+                if (confirmBtn) {
+                    confirmBtn.disabled = true;
+                    confirmBtn.style.opacity = '0.5';
+                    confirmBtn.style.cursor = 'not-allowed';
+                }
+                
+                // If they typed a 12-character string that isn't purely digits
+                if (val.length === 12 && !/^\d+$/.test(val)) {
+                    if (utrError) utrError.style.display = 'block';
+                    utrInput.style.borderColor = '#dc2626';
+                }
+            }
+        });
+
+        utrInput.addEventListener('blur', () => {
+            const val = utrInput.value.trim();
+            const utrError = $('utr-error');
+            if (val.length > 0 && !/^\d{12}$/.test(val)) {
+                if (utrError) utrError.style.display = 'block';
+                utrInput.style.borderColor = '#dc2626';
+            } else {
+                if (utrError && /^\d{12}$/.test(val)) utrError.style.display = 'none';
             }
         });
     }
