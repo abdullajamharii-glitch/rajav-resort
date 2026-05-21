@@ -139,6 +139,18 @@
                             </div>
                         </div>
 
+                        <!-- Dynamic Price Display -->
+                        <div id="price-display" style="display: none; margin-top: 1.5rem; background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05)); border: 1px solid rgba(212,175,55,0.3); border-radius: 12px; padding: 1.2rem 1.5rem; transition: all 0.3s ease;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                                <span style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Room Rate per Night</span>
+                                <span id="room-rate" style="color: #fff; font-size: 1.15rem; font-weight: 600;">₹0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <span style="color: var(--clr-accent); font-weight: 600; font-size: 1rem;">Advance Payment (50%)</span>
+                                <span id="advance-amount" style="color: var(--clr-accent); font-size: 1.3rem; font-weight: 700;">₹0</span>
+                            </div>
+                        </div>
+
                         <div class="form-group" style="margin-top: 1rem;">
                             <label for="requests">Special Requests (Optional)</label>
                             <textarea id="requests" name="requests" rows="4" placeholder="Any dietary requirements, arrival time, etc." style="width: 100%; padding: 0.8rem; border-radius: 4px; border: 1px solid #ccc; font-family: inherit; font-size: 1rem; color: #333; background-color: #fff;"></textarea>
@@ -188,6 +200,35 @@
             </div>
             <div class="modal-body">
                 <p>Thank you for choosing Rajav Resort! Your reservation request has been successfully submitted. Our team will contact you shortly to confirm your booking.</p>
+                
+                <!-- Advance Payment Section -->
+                <div id="payment-section" style="margin-top: 1.5rem; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #86efac; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <p style="color: #166534; font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem;">Pay Advance to Confirm Instantly</p>
+                    <p style="color: #15803d; font-size: 0.85rem; margin-bottom: 1rem;">Pay 50% advance to secure your booking</p>
+                    
+                    <div style="background: #fff; border-radius: 10px; padding: 1rem; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="color: #374151; font-size: 0.9rem;">Room</span>
+                            <span id="modal-room-name" style="color: #111827; font-weight: 600; font-size: 0.9rem;">—</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="color: #374151; font-size: 0.9rem;">Room Rate</span>
+                            <span id="modal-room-rate" style="color: #111827; font-weight: 600; font-size: 0.9rem;">₹0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; border-top: 1px dashed #e5e7eb;">
+                            <span style="color: #166534; font-weight: 700; font-size: 1.05rem;">Advance (50%)</span>
+                            <span id="modal-advance-amount" style="color: #166534; font-weight: 700; font-size: 1.25rem;">₹0</span>
+                        </div>
+                    </div>
+                    
+                    <a id="gpay-btn" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; background: #fff; color: #3c4043; border: 2px solid #dadce0; border-radius: 50px; padding: 0.85rem 2rem; font-size: 1rem; font-weight: 600; text-decoration: none; width: 100%; box-sizing: border-box; transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.08);" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#4285f4';" onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.08)'; this.style.borderColor='#dadce0';">
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z" fill="#4285F4"/>
+                        </svg>
+                        <span>Pay <span id="gpay-amount">₹0</span> via Google Pay</span>
+                    </a>
+                    <p style="color: #6b7280; font-size: 0.75rem; margin-top: 0.8rem;">Opens Google Pay / UPI app on your phone</p>
+                </div>
             </div>
             <div class="modal-footer">
                 <a href="index.html" class="btn btn-primary btn-block">Return to Home</a>

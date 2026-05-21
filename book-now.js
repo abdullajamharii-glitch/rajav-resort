@@ -1,6 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
     const finalForm = document.getElementById('finalBookingForm');
     const successModal = document.getElementById('success-modal');
+
+    // ========== ROOM PRICES & UPI CONFIG ==========
+    // UPDATE THIS UPI ID with your actual Google Pay / UPI ID
+    const UPI_ID = 'rajavresort@okaxis';
+    const UPI_NAME = 'Rajav Resort';
+
+    const ROOM_PRICES = {
+        'Premium Jacuzzi Bathtub Room': 12000,
+        'Premium Beach View Room': 10000,
+        'Medium Balcony Room': 5000,
+        'Economy Room': 3000,
+        'Entire Resort Booking': 50000
+    };
+
+    function formatINR(amount) {
+        return '₹' + amount.toLocaleString('en-IN');
+    }
+
+    function updatePriceDisplay(roomValue) {
+        const priceDisplay = document.getElementById('price-display');
+        const roomRate = document.getElementById('room-rate');
+        const advanceAmount = document.getElementById('advance-amount');
+        if (!priceDisplay || !roomRate || !advanceAmount) return;
+
+        const price = ROOM_PRICES[roomValue];
+        if (price) {
+            roomRate.textContent = formatINR(price);
+            advanceAmount.textContent = formatINR(Math.round(price / 2));
+            priceDisplay.style.display = 'block';
+        } else {
+            priceDisplay.style.display = 'none';
+        }
+    }
+
+    function updateModalPayment(roomValue) {
+        const price = ROOM_PRICES[roomValue] || 0;
+        const advance = Math.round(price / 2);
+
+        const modalRoomName = document.getElementById('modal-room-name');
+        const modalRoomRate = document.getElementById('modal-room-rate');
+        const modalAdvance = document.getElementById('modal-advance-amount');
+        const gpayAmount = document.getElementById('gpay-amount');
+        const gpayBtn = document.getElementById('gpay-btn');
+
+        if (modalRoomName) modalRoomName.textContent = roomValue;
+        if (modalRoomRate) modalRoomRate.textContent = formatINR(price);
+        if (modalAdvance) modalAdvance.textContent = formatINR(advance);
+        if (gpayAmount) gpayAmount.textContent = formatINR(advance);
+
+        if (gpayBtn && advance > 0) {
+            const upiUrl = 'upi://pay?pa=' + encodeURIComponent(UPI_ID)
+                + '&pn=' + encodeURIComponent(UPI_NAME)
+                + '&am=' + advance
+                + '&cu=INR'
+                + '&tn=' + encodeURIComponent('Advance Booking - ' + roomValue);
+            gpayBtn.href = upiUrl;
+        }
+    }
+
+    // Listen for room type changes to show price
+    const roomTypeSelect = document.getElementById('room-type');
+    if (roomTypeSelect) {
+        roomTypeSelect.addEventListener('change', function() {
+            updatePriceDisplay(this.value);
+        });
+        // If pre-filled from URL, show price immediately
+        if (roomTypeSelect.value) {
+            updatePriceDisplay(roomTypeSelect.value);
+        }
+    }
     
     // Define showFullModal locally so it works on this page
     const fullModal = document.getElementById('full-modal');
@@ -205,6 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             } else {
                                 // Success!
                                 if (successModal) {
+                                    // Update payment modal with selected room info
+                                    const selectedRoom = finalForm.querySelector('select[name="roomType"]');
+                                    if (selectedRoom) {
+                                        updateModalPayment(selectedRoom.value);
+                                    }
                                     successModal.classList.add('active');
                                     successModal.setAttribute('aria-hidden', 'false');
                                     document.body.style.overflow = 'hidden';
@@ -217,6 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             submitBtn.textContent = originalBtnText;
                             submitBtn.disabled = false;
                             if (successModal) {
+                                const selectedRoom = finalForm.querySelector('select[name="roomType"]');
+                                if (selectedRoom) {
+                                    updateModalPayment(selectedRoom.value);
+                                }
                                 successModal.classList.add('active');
                                 successModal.setAttribute('aria-hidden', 'false');
                                 document.body.style.overflow = 'hidden';
