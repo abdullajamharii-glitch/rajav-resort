@@ -2051,3 +2051,148 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         height: 28px;
     }
 }
+
+/* ==========================================================================
+   Temporary Booking Notice Modal (Responsive & Premium)
+   ========================================================================== */
+.booking-notice-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999; /* Ensure it stays above everything, including normal modals */
+    background: rgba(0, 8, 20, 0.8);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.booking-notice-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.booking-notice-modal {
+    background: linear-gradient(145deg, #001a33 0%, #000c1a 100%);
+    border: 2px solid var(--clr-secondary);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 540px;
+    padding: var(--space-md);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(212, 175, 55, 0.15);
+    text-align: center;
+    position: relative;
+    transform: scale(0.9) translateY(30px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.booking-notice-overlay.active .booking-notice-modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.booking-notice-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--space-xs);
+    display: inline-block;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+    animation: goldPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes goldPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); }
+}
+
+.booking-notice-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    color: var(--clr-secondary);
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.booking-notice-message {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-md);
+    font-weight: 300;
+}
+
+.booking-notice-message strong {
+    color: var(--clr-secondary);
+    font-weight: 600;
+}
+
+.booking-notice-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.btn-notice-whatsapp {
+    background: linear-gradient(135deg, #D4AF37 0%, #aa7c11 100%);
+    color: #001a33 !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.btn-notice-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, #e5be49 0%, #c4921b 100%);
+}
+
+.btn-notice-whatsapp svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
+
+.btn-notice-close {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-notice-close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 576px) {
+    .booking-notice-modal {
+        padding: 1.75rem var(--space-sm);
+        border-radius: var(--radius-md);
+    }
+    
+    .booking-notice-actions {
+        gap: 0.75rem;
+    }
+}
+

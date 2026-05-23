@@ -246,31 +246,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const submitBtn  = finalForm.querySelector('button[type="submit"]');
             const origText   = submitBtn.textContent;
-            submitBtn.textContent = 'Checking availability…';
+            submitBtn.textContent = 'Opening WhatsApp…';
             submitBtn.disabled    = true;
 
-            const checkInVal = finalForm.querySelector('[name="checkIn"]').value;
-            const roomVal    = finalForm.querySelector('[name="roomType"]').value;
-            const roomSelect = finalForm.querySelector('[name="roomType"]');
-            const roomName   = roomSelect.options[roomSelect.selectedIndex].text;
+            const checkInVal  = finalForm.querySelector('[name="checkIn"]').value;
+            const checkOutVal = finalForm.querySelector('[name="checkOut"]').value;
+            const roomVal     = finalForm.querySelector('[name="roomType"]').value;
+            const firstName   = finalForm.querySelector('[name="firstName"]').value;
+            const lastName    = finalForm.querySelector('[name="lastName"]').value;
+            const guests      = finalForm.querySelector('[name="guests"]').value || '1';
 
-            try {
-                const available = await checkAvailability(checkInVal, roomVal);
-                if (!available) {
-                    window.showFullModal(roomName);
-                } else {
-                    populatePaymentModal(roomVal);
-                    openModal($('payment-modal'));
-                }
-            } catch (err) {
-                console.error('Availability check failed:', err);
-                // Network error — show payment modal optimistically so user isn't stuck
-                populatePaymentModal(roomVal);
-                openModal($('payment-modal'));
-            } finally {
+            const text = `Hello Rajav Beach Resort! I would like to make a reservation request:
+- Name: ${firstName} ${lastName}
+- Room Type: ${roomVal}
+- Check-in Date: ${checkInVal}
+- Check-out Date: ${checkOutVal}
+- Guests: ${guests}`;
+
+            const whatsappUrl = "https://wa.me/918015562576?text=" + encodeURIComponent(text);
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
                 submitBtn.textContent = origText;
                 submitBtn.disabled    = false;
-            }
+            }, 500);
         });
     }
 
@@ -374,4 +373,55 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    /* ==========================================================================
+       Booking Gatekeeper (Non-dismissible popup specifically for book-now.html)
+       ========================================================================== */
+    const activateGatekeeper = () => {
+        const noticeOverlay = document.getElementById('booking-notice');
+        if (noticeOverlay) {
+            // Repurpose close button to redirect back to homepage
+            const closeBtn = document.getElementById('btn-notice-close');
+            if (closeBtn) {
+                closeBtn.textContent = "Back to Homepage";
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.location.href = "/";
+                });
+            }
+            
+            // Remove click listener on overlay background that could dismiss it
+            noticeOverlay.style.pointerEvents = 'auto';
+            const clone = noticeOverlay.cloneNode(true);
+            noticeOverlay.parentNode.replaceChild(clone, noticeOverlay);
+
+            // Re-bind actions to cloned elements
+            const newOverlay = document.getElementById('booking-notice');
+            const newCloseBtn = document.getElementById('btn-notice-close');
+            const newWhatsappBtn = document.getElementById('btn-notice-whatsapp');
+
+            newCloseBtn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "/";
+            });
+
+            newWhatsappBtn?.addEventListener('click', () => {
+                const whatsappUrl = "https://wa.me/918015562576?text=" + encodeURIComponent("Hello Rajav Beach Resort! I saw that online bookings for this month are full, but I would like to inquire about booking a stay.");
+                window.open(whatsappUrl, '_blank');
+                window.location.href = "/";
+            });
+
+            // Force overlay active
+            newOverlay.classList.add('active');
+            newOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Retry if DOM elements aren't injected yet
+            setTimeout(activateGatekeeper, 50);
+        }
+    };
+
+    // Activate the gatekeeper overlay
+    setTimeout(activateGatekeeper, 100);
 });
