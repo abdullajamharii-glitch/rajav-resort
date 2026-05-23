@@ -433,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div id="booking-notice" class="booking-notice-overlay" aria-hidden="true" role="dialog" aria-labelledby="booking-notice-title">
                 <div class="booking-notice-modal">
                     <div class="booking-notice-icon">📢</div>
-                    <h2 id="booking-notice-title" class="booking-notice-title">Bookings Full for This Month</h2>
+                    <h2 id="booking-notice-title" class="booking-notice-title">Fully Booked for This Month</h2>
                     <p class="booking-notice-message">
                         We have temporarily closed direct online bookings as <strong>our resort is fully booked for this month</strong>.
                         <br><br>
