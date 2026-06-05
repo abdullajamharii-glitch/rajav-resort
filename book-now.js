@@ -374,54 +374,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==========================================================================
-       Booking Gatekeeper (Non-dismissible popup specifically for book-now.html)
-       ========================================================================== */
-    const activateGatekeeper = () => {
-        const noticeOverlay = document.getElementById('booking-notice');
-        if (noticeOverlay) {
-            // Repurpose close button to redirect back to homepage
-            const closeBtn = document.getElementById('btn-notice-close');
-            if (closeBtn) {
-                closeBtn.textContent = "Back to Homepage";
-                closeBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = "/";
-                });
-            }
-            
-            // Remove click listener on overlay background that could dismiss it
-            noticeOverlay.style.pointerEvents = 'auto';
-            const clone = noticeOverlay.cloneNode(true);
-            noticeOverlay.parentNode.replaceChild(clone, noticeOverlay);
 
-            // Re-bind actions to cloned elements
-            const newOverlay = document.getElementById('booking-notice');
-            const newCloseBtn = document.getElementById('btn-notice-close');
-            const newWhatsappBtn = document.getElementById('btn-notice-whatsapp');
-
-            newCloseBtn?.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = "/";
-            });
-
-            newWhatsappBtn?.addEventListener('click', () => {
-                const whatsappUrl = "https://wa.me/918015562576?text=" + encodeURIComponent("Hello Rajav Beach Resort! I saw that online bookings for this month are full, but I would like to inquire about booking a stay.");
-                window.open(whatsappUrl, '_blank');
-                window.location.href = "/";
-            });
-
-            // Force overlay active
-            newOverlay.classList.add('active');
-            newOverlay.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        } else {
-            // Retry if DOM elements aren't injected yet
-            setTimeout(activateGatekeeper, 50);
-        }
-    };
-
-    // Activate the gatekeeper overlay
-    setTimeout(activateGatekeeper, 100);
 });
