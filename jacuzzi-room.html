@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) - loaded dynamically to avoid forced reflow -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-L4D20GNVNX";
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){window.dataLayer.push(arguments);}
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-L4D20GNVNX');
+        }, 1200);
+      });
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization: Target keyword 'jacuzzi room Cherai beach' -->
+    <title>Premium Jacuzzi Room on Cherai Beach | Rajav Beach Resort</title>
+    <meta name="description" content="Indulge in a romantic getaway in our Premium Jacuzzi Bathtub Room at Cherai Beach. Private warm-water jacuzzi with Arabian Sea views, infinity pool access, and complimentary breakfast.">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
+    <meta name="application-name" content="Rajav Resort">
+    <meta name="apple-mobile-web-app-title" content="Rajav Resort">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Premium Jacuzzi Room on Cherai Beach | Rajav Beach Resort">
+    <meta property="og:description" content="Indulge in a romantic getaway in our Premium Jacuzzi Bathtub Room at Cherai Beach. Private warm-water jacuzzi with Arabian Sea views, infinity pool access, and complimentary breakfast.">
+    <meta property="og:image" content="https://www.rajavbeachresort.com/room-jacuzzi.webp">
+    <meta property="og:url" content="https://www.rajavbeachresort.com/jacuzzi-room">
+    <meta property="og:site_name" content="Rajav Resort">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://www.rajavbeachresort.com/jacuzzi-room">
+
+    <!-- Preloads & Styles -->
+    <link rel="preload" href="style.css?v=7" as="style">
+    <link rel="preload" href="fonts/cormorant-700.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="fonts/inter-400.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=7">
+    
+    <style>
+        .jacuzzi-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('room-jacuzzi.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .room-specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .room-specs-table td {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+        .room-specs-table td:first-child {
+            font-weight: 600;
+            color: var(--clr-primary);
+        }
+        .sidebar-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border-top: 5px solid var(--clr-secondary);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        .feature-tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .feature-tag {
+            background: rgba(212,175,55,0.1);
+            color: var(--clr-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .faq-section {
+            margin-top: 5rem;
+            padding-top: 5rem;
+            border-top: 1px solid #eef2f7;
+        }
+        .faq-accordion {
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faq-accordion-item {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid #eef2f7;
+            overflow: hidden;
+        }
+        .faq-header {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+        .faq-header:hover {
+            background: #fafbfc;
+        }
+        .faq-header h3 {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--clr-primary);
+        }
+        .faq-header-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--clr-secondary);
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .faq-accordion-item.open .faq-content {
+            max-height: 200px;
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid #eef2f7;
+        }
+        .faq-accordion-item.open .faq-header-icon {
+            transform: rotate(45deg);
+        }
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .sidebar-card {
+                position: static;
+            }
+        }
+    </style>
+
+    <!-- Schema Markup JSON-LD for HotelRoom SEO Rank -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HotelRoom",
+      "name": "Premium Jacuzzi Bathtub Room",
+      "description": "Luxurious suite with private warm-water jacuzzi bathtub, panoramic beachfront vistas of the Arabian Sea, and access to our oceanfront infinity pool deck at Cherai Beach.",
+      "image": "https://www.rajavbeachresort.com/room-jacuzzi.webp",
+      "bed": {
+        "@type": "BedType",
+        "name": "Ultra King Sized Bed"
+      },
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "value": 2
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi Bathtub", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Ocean View", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Direct Beach Access", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Infinity Pool Access", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Complimentary Breakfast", "value": true }
+      ]
+    }
+    </script>
+</head>
+<body class="rooms-page">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="site-header" id="header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Rajav Beach Resort Home">
+                <svg class="brand-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                <span>Rajav Beach Resort</span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav id="primary-nav" class="primary-nav">
+                <ul class="nav-links">
+                    <li><a href="/#home">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/rooms">Rooms</a></li>
+                    <li><a href="/#amenities">Amenities</a></li>
+                    <li><a href="/#gallery">Gallery</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+                <a href="/book-now" class="btn btn-primary nav-cta">Book Your Stay</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="jacuzzi-hero">
+            <div class="container">
+                <span class="section-tag" style="color: var(--clr-secondary-text);">Signature Experience</span>
+                <h1 class="hero-title" style="margin-bottom: 0.8rem; color: #fff;">Premium Jacuzzi Room</h1>
+                <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: rgba(255,255,255,0.9);">Wake up to the sound of breaking waves and relax in your private warm-water jacuzzi directly on Cherai Beach.</p>
+            </div>
+        </section>
+
+        <!-- Detailed Description -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="detail-grid">
+                    <div>
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Luxury Suite with Private Jacuzzi Bathtub</h2>
+                        <p class="room-text" style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">Indulge in the ultimate romantic getaway at Rajav Beach Resort. Highly preferred by couples and honeymooners, our signature Premium Jacuzzi Room combines elegant wooden interiors with modern oceanfront comfort. Relax in your private, warm-water jacuzzi bathtub overlooking the gorgeous Cherai shoreline and the Arabian Sea.</p>
+                        
+                        <p class="room-text" style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">Guests enjoy direct access to the clean, golden sands of Cherai Beach, alongside full access to our oceanfront infinity swimming pool. The suite is thoughtfully styled with premium wooden furnishings, air conditioning, and offers dedicated service from our resort staff to ensure an unforgettable stay.</p>
+                        
+                        <div class="feature-tag-list">
+                            <span class="feature-tag">🛁 Private Jacuzzi</span>
+                            <span class="feature-tag">🌊 Arabian Sea View</span>
+                            <span class="feature-tag">🏊 Infinity Pool Access</span>
+                            <span class="feature-tag">🏖️ Direct Beach Access</span>
+                            <span class="feature-tag">🍳 Complimentary Breakfast</span>
+                            <span class="feature-tag">📶 High-Speed WiFi</span>
+                            <span class="feature-tag">❄️ Air Conditioning</span>
+                        </div>
+
+                        <h3 style="margin-top: 2.5rem; color: var(--clr-primary);">Room Specifications</h3>
+                        <table class="room-specs-table">
+                            <tr>
+                                <td>Bed Type</td>
+                                <td>Ultra King Sized Bed</td>
+                            </tr>
+                            <tr>
+                                <td>Max Occupancy</td>
+                                <td>2 Adults + 1 Child</td>
+                            </tr>
+                            <tr>
+                                <td>Key Highlights</td>
+                                <td>Private warm-water jacuzzi inside the room, Panoramic Beach View, Gated Parking</td>
+                            </tr>
+                            <tr>
+                                <td>Check-in / Check-out</td>
+                                <td>1:00 PM / 11:00 AM</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <div class="sidebar-card">
+                            <h3 style="color: var(--clr-primary); margin-bottom: 0.5rem;">Booking Details</h3>
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--clr-secondary); margin-bottom: 1.5rem;">
+                                ₹12,000 <span style="font-size: 1rem; color: var(--clr-text-muted); font-weight: normal;">/ Night</span>
+                            </div>
+                            <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Rates include complimentary gourmet breakfast, private jacuzzi setup, infinity pool access, and direct beach entry.</p>
+                            <a href="/book-now?roomType=Premium+Jacuzzi+Bathtub+Room" class="btn btn-secondary" style="width: 100%; text-align: center; display: block;">Reserve This Room</a>
+                            
+                            <div style="margin-top: 1.5rem; border-top: 1px solid #eef2f7; padding-top: 1.5rem; font-size: 0.85rem; color: var(--clr-text-muted);">
+                                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>🛡️</span> 100% Secure Booking
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <span>💬</span> Need help? <a href="https://wa.me/918015562576" target="_blank" style="color: var(--clr-secondary); text-decoration: underline;">Chat on WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <div class="section-header text-center">
+                        <span class="section-tag">Questions</span>
+                        <h2 class="section-title">Jacuzzi Room FAQ</h2>
+                        <p class="section-subtitle">Everything you need to know about booking our private jacuzzi suite in Cherai.</p>
+                    </div>
+
+                    <div class="faq-accordion">
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Is the jacuzzi bathtub completely private?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Yes, the warm-water jacuzzi bathtub is completely private and located inside your suite, positioned beautifully to allow ocean views while you relax.
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Can we view the sea directly from the room and jacuzzi?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Yes, the Premium Jacuzzi room is positioned beachfront, offering panoramic, unobstructed views of the Arabian Sea right from the comfort of your room and jacuzzi setup.
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Do you offer decorations for honeymoons or anniversaries?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Yes, we offer premium room decoration packages (flowers, balloons, customized cakes) for couples celebrating special occasions. Contact us on WhatsApp after booking to request customized arrangements.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="brand-logo" style="margin-bottom: 1.2rem;">
+                        <svg class="brand-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                        <span>Rajav Beach Resort</span>
+                    </a>
+                    <p style="font-size: 0.9rem; color: var(--clr-text-muted); margin-bottom: 1.5rem; line-height: 1.4;">Cherai Beach, near Kochi, Kerala 683514, India. Experience the ultimate beachfront getaway.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/rajavbeachresort" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://wa.me/918015562576" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="/#home">Home</a></li>
+                        <li><a href="/#about">About Us</a></li>
+                        <li><a href="/rooms">Rooms & Suites</a></li>
+                        <li><a href="/#amenities">Amenities</a></li>
+                        <li><a href="/#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p style="font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 1.2rem;">Subscribe to our newsletter to receive updates on exclusive offers and packages.</p>
+                    <form class="newsletter-form" id="footer-newsletter-form">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rajav Beach Resort. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js?v=8" defer></script>
+    
+    <!-- FAQ Accordion Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.faq-accordion-item');
+            accordions.forEach(item => {
+                const header = item.querySelector('.faq-header');
+                header.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+                    accordions.forEach(acc => acc.classList.remove('open'));
+                    if (!isOpen) {
+                        item.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

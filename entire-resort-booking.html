@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) - loaded dynamically to avoid forced reflow -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-L4D20GNVNX";
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){window.dataLayer.push(arguments);}
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-L4D20GNVNX');
+        }, 1200);
+      });
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization: Target keyword 'entire resort booking Kerala' -->
+    <title>Entire Resort Booking Kerala | Exclusive Beach Resort Buyout</title>
+    <meta name="description" content="Book the entire Rajav Beach Resort in Cherai, Kerala. Exclusive beachfront buyout featuring 5 luxury suites, private infinity pool, beach frontage, and dedicated staff.">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
+    <meta name="application-name" content="Rajav Resort">
+    <meta name="apple-mobile-web-app-title" content="Rajav Resort">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Entire Resort Booking Kerala | Exclusive Beach Resort Buyout">
+    <meta property="og:description" content="Book the entire Rajav Beach Resort in Cherai, Kerala. Exclusive beachfront buyout featuring 5 luxury suites, private infinity pool, beach frontage, and dedicated staff.">
+    <meta property="og:image" content="https://www.rajavbeachresort.com/room-jacuzzi.webp">
+    <meta property="og:url" content="https://www.rajavbeachresort.com/entire-resort-booking">
+    <meta property="og:site_name" content="Rajav Resort">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://www.rajavbeachresort.com/entire-resort-booking">
+
+    <!-- Preloads & Styles -->
+    <link rel="preload" href="style.css?v=7" as="style">
+    <link rel="preload" href="fonts/cormorant-700.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="fonts/inter-400.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=7">
+    
+    <style>
+        .buyout-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('room-jacuzzi.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .specs-table td {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--clr-primary);
+        }
+        .sidebar-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border-top: 5px solid #aa7c11;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        .feature-tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .feature-tag {
+            background: rgba(170,124,17,0.1);
+            color: #aa7c11;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .faq-section {
+            margin-top: 5rem;
+            padding-top: 5rem;
+            border-top: 1px solid #eef2f7;
+        }
+        .faq-accordion {
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faq-accordion-item {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid #eef2f7;
+            overflow: hidden;
+        }
+        .faq-header {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+        .faq-header:hover {
+            background: #fafbfc;
+        }
+        .faq-header h3 {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--clr-primary);
+        }
+        .faq-header-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: #aa7c11;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .faq-accordion-item.open .faq-content {
+            max-height: 200px;
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid #eef2f7;
+        }
+        .faq-accordion-item.open .faq-header-icon {
+            transform: rotate(45deg);
+        }
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .sidebar-card {
+                position: static;
+            }
+        }
+    </style>
+
+    <!-- Schema Markup JSON-LD for private resort buyout SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Entire Resort Booking (Exclusive Buyout) at Rajav Beach Resort",
+      "image": "https://www.rajavbeachresort.com/room-jacuzzi.webp",
+      "description": "Book the entire Rajav Beach Resort exclusively for private gatherings, events, weddings, or corporate retreats. Enjoy private access to 5 rooms, infinity pool, and beach frontage in Cherai, Kerala.",
+      "offers": {
+        "@type": "Offer",
+        "price": "50000.00",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2026-01-01"
+      }
+    }
+    </script>
+</head>
+<body class="rooms-page">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="site-header" id="header">
+        <div class="container header-container">
+            <a href="/" class="brand-logo" aria-label="Rajav Beach Resort Home">
+                <svg class="brand-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                <span>Rajav Beach Resort</span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav id="primary-nav" class="primary-nav">
+                <ul class="nav-links">
+                    <li><a href="/#home">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/rooms">Rooms</a></li>
+                    <li><a href="/#amenities">Amenities</a></li>
+                    <li><a href="/#gallery">Gallery</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+                <a href="/book-now" class="btn btn-primary nav-cta">Book Your Stay</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="buyout-hero" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('room-jacuzzi.webp');">
+            <div class="container">
+                <span class="section-tag" style="color: #d4af37;">Exclusive Resort Buyout</span>
+                <h1 class="hero-title" style="margin-bottom: 0.8rem; color: #fff;">Entire Resort Booking</h1>
+                <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: rgba(255,255,255,0.9);">Rent the entire property exclusively for your corporate retreats, group reunions, weddings, or private family getaways in Kerala.</p>
+            </div>
+        </section>
+
+        <!-- Detailed Description -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="detail-grid">
+                    <div>
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Take Control of Paradise</h2>
+                        <p class="room-text" style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">Enjoy complete security, absolute privacy, and dedicated access to the entire Rajav Beach Resort on Cherai Beach. Our exclusive buyout option allows you to host up to 12-15 guests across all 5 of our premium, luxury suites and rooms. With zero external guests, the property becomes your private beachside estate.</p>
+                        
+                        <p class="room-text" style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">This package includes exclusive access to our beachfront infinity swimming pool, direct beach access, private parking, and the beachside dining area. Your stay is fully supported by our dedicated kitchen and concierge staff, offering personalized menus and customized event assistance.</p>
+                        
+                        <div class="feature-tag-list">
+                            <span class="feature-tag">🏰 100% Exclusive Access</span>
+                            <span class="feature-tag">🛏️ 5 Luxury Suites/Rooms</span>
+                            <span class="feature-tag">🏊 Private Infinity Pool</span>
+                            <span class="feature-tag">🏖️ Exclusive Beach Frontage</span>
+                            <span class="feature-tag">👨‍🍳 Dedicated Kitchen Staff</span>
+                            <span class="feature-tag">🛡️ 24/7 Gated Security</span>
+                            <span class="feature-tag">🚗 Free Gated Parking</span>
+                        </div>
+
+                        <h3 style="margin-top: 2.5rem; color: var(--clr-primary);">What's Included in Your Stay</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td>Included Rooms</td>
+                                <td>Premium Jacuzzi Room, Premium Beach View Room, Balcony Rooms & Economy Rooms (5 total)</td>
+                            </tr>
+                            <tr>
+                                <td>Guest Capacity</td>
+                                <td>Sleeps 10-15 Adults comfortably</td>
+                            </tr>
+                            <tr>
+                                <td>Property Access</td>
+                                <td>Exclusive use of the beachfront, pool deck, dining lounge, and parking</td>
+                            </tr>
+                            <tr>
+                                <td>Service Staff</td>
+                                <td>Private butler service, housekeeping, and dedicated culinary team</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <div class="sidebar-card">
+                            <h3 style="color: var(--clr-primary); margin-bottom: 0.5rem;">Resort Buyout Rate</h3>
+                            <div style="font-size: 2rem; font-weight: 700; color: #aa7c11; margin-bottom: 1.5rem;">
+                                ₹50,000 <span style="font-size: 1rem; color: var(--clr-text-muted); font-weight: normal;">/ Night</span>
+                            </div>
+                            <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Ideal for corporate team outings, destination family reunions, intimate wedding groups, or bachelor/bachelorette parties.</p>
+                            <a href="/book-now?roomType=Entire+Resort+Booking" class="btn btn-secondary" style="width: 100%; text-align: center; display: block; background: linear-gradient(135deg, #d4af37, #aa7c11); border: none;">Book Entire Resort</a>
+                            
+                            <div style="margin-top: 1.5rem; border-top: 1px solid #eef2f7; padding-top: 1.5rem; font-size: 0.85rem; color: var(--clr-text-muted);">
+                                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>📅</span> Early booking recommended for weekends
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <span>💬</span> Have custom event needs? <a href="https://wa.me/918015562576" target="_blank" style="color: #aa7c11; text-decoration: underline;">Contact Concierge</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <div class="section-header text-center">
+                        <span class="section-tag">Group Stay Guide</span>
+                        <h2 class="section-title">Resort Buyout FAQ</h2>
+                        <p class="section-subtitle">Everything you need to know about exclusive property rentals in Kerala.</p>
+                    </div>
+
+                    <div class="faq-accordion">
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Can we host private events, weddings, or parties?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Yes! Booking the entire resort is the perfect option for hosting private beachfront dinners, anniversaries, intimate wedding functions, and corporate team events. Our staff can help coordinate music, lighting, and seating arrangements.
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Are meals and catering options included?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Complimentary breakfast is included. For lunch and dinner, you can collaborate directly with our private chef to customize traditional Kerala seafood, continental dishes, or group BBQ dinners at additional costs.
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion-item">
+                            <div class="faq-header">
+                                <h3>Is there enough parking for all guests?</h3>
+                                <span class="faq-header-icon">+</span>
+                            </div>
+                            <div class="faq-content">
+                                Yes, our resort has secure, gated, on-site parking spaces available for up to 6 vehicles, completely free for buyout guests.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="brand-logo" style="margin-bottom: 1.2rem;">
+                        <svg class="brand-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                        <span>Rajav Beach Resort</span>
+                    </a>
+                    <p style="font-size: 0.9rem; color: var(--clr-text-muted); margin-bottom: 1.5rem; line-height: 1.4;">Cherai Beach, near Kochi, Kerala 683514, India. Experience the ultimate beachfront getaway.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/rajavbeachresort" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://wa.me/918015562576" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="/#home">Home</a></li>
+                        <li><a href="/#about">About Us</a></li>
+                        <li><a href="/rooms">Rooms & Suites</a></li>
+                        <li><a href="/#amenities">Amenities</a></li>
+                        <li><a href="/#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p style="font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 1.2rem;">Subscribe to our newsletter to receive updates on exclusive offers and packages.</p>
+                    <form class="newsletter-form" id="footer-newsletter-form">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rajav Beach Resort. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js?v=8" defer></script>
+    
+    <!-- FAQ Accordion Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.faq-accordion-item');
+            accordions.forEach(item => {
+                const header = item.querySelector('.faq-header');
+                header.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+                    accordions.forEach(acc => acc.classList.remove('open'));
+                    if (!isOpen) {
+                        item.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
