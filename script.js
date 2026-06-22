@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fpConfig = {
             minDate: "today",
             dateFormat: "Y-m-d",
+            disableMobile: true,
             onDayCreate: function(dObj, dStr, fp, dayElem) {
                 const localDate = new Date(dayElem.dateObj.getTime() - (dayElem.dateObj.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
                 

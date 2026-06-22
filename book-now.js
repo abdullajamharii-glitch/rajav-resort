@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         import('https://cdn.jsdelivr.net/npm/flatpickr/+esm')
             .then(m => {
                 const fp = m.default;
-                fp('#check-in',  { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkInParam });
-                fp('#check-out', { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkOutParam });
+                fp('#check-in',  { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkInParam, disableMobile: true });
+                fp('#check-out', { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkOutParam, disableMobile: true });
             })
             .catch(e => console.warn('Flatpickr failed to load:', e));
     }
