@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) - loaded dynamically to avoid forced reflow -->
+    <!-- Google tag (gtag.js) - lazy loaded on user interaction for maximum performance & LLM readability -->
     <script>
-      window.addEventListener('load', () => {
-        setTimeout(() => {
+      (function() {
+        let scriptLoaded = false;
+        function loadGTM() {
+          if (scriptLoaded) return;
+          scriptLoaded = true;
+          const events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
+          events.forEach(event => window.removeEventListener(event, loadGTM));
+          
           const script = document.createElement('script');
           script.async = true;
           script.src = "https://www.googletagmanager.com/gtag/js?id=G-L4D20GNVNX";
@@ -14,8 +20,11 @@
           window.gtag = function(){window.dataLayer.push(arguments);}
           window.gtag('js', new Date());
           window.gtag('config', 'G-L4D20GNVNX');
-        }, 1200);
-      });
+        }
+        const events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
+        events.forEach(event => window.addEventListener(event, loadGTM, { passive: true }));
+        window.addEventListener('beforeunload', loadGTM);
+      })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

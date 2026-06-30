@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof data === 'number') {
                     isFullyBooked = data >= roomCapacities.total;
                 } else if (typeof data === 'object') {
-                    // Check if total or all specific rooms are full, or Entire Resort is booked
                     isFullyBooked = data.total >= roomCapacities.total || data["Entire Resort Booking"] > 0;
                 }
                 
@@ -80,13 +79,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        import('https://cdn.jsdelivr.net/npm/flatpickr/+esm').then(module => {
-            const flatpickr = module.default;
-            flatpickr("#check-in-home", fpConfig);
-            flatpickr("#check-out-home", fpConfig);
-            flatpickr("#check-in", fpConfig); // Main form
-            flatpickr("#check-out", fpConfig); // Main form
-        }).catch(err => console.error("Flatpickr failed to load", err));
+        const inputIds = ["#check-in-home", "#check-out-home", "#check-in", "#check-out"];
+        let initialized = false;
+
+        const loadAndInit = () => {
+            if (initialized) return;
+            initialized = true;
+
+            inputIds.forEach(id => {
+                const el = document.querySelector(id);
+                if (el) {
+                    el.removeEventListener('focus', loadAndInit);
+                    el.removeEventListener('click', loadAndInit);
+                    el.removeEventListener('mouseenter', loadAndInit);
+                }
+            });
+
+            import('https://cdn.jsdelivr.net/npm/flatpickr/+esm').then(module => {
+                const flatpickr = module.default;
+                inputIds.forEach(id => {
+                    if (document.querySelector(id)) {
+                        flatpickr(id, fpConfig);
+                    }
+                });
+                
+                // If the user already focused/clicked an input, trigger its click to open flatpickr calendar dropdown
+                const activeEl = document.activeElement;
+                if (activeEl && inputIds.includes('#' + activeEl.id)) {
+                    // Slight delay to allow flatpickr instance to bind correctly
+                    setTimeout(() => {
+                        activeEl.click();
+                    }, 50);
+                }
+            }).catch(err => console.error("Flatpickr failed to load", err));
+        };
+
+        inputIds.forEach(id => {
+            const el = document.querySelector(id);
+            if (el) {
+                el.addEventListener('focus', loadAndInit, { passive: true });
+                el.addEventListener('click', loadAndInit, { passive: true });
+                el.addEventListener('mouseenter', loadAndInit, { passive: true });
+            }
+        });
     }
 
     /* ==========================================================================

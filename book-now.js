@@ -183,15 +183,45 @@ document.addEventListener('DOMContentLoaded', () => {
         fill('checkOut',  checkOutParam);
         fill('guests',    urlParams.get('guests'));
         fill('roomType',  urlParams.get('roomType') || urlParams.get('room-type'));
+        // Flatpickr date pickers (lazy loaded on user interaction)
+        const inputIds = ['#check-in', '#check-out'];
+        let initialized = false;
 
-        // Flatpickr date pickers
-        import('https://cdn.jsdelivr.net/npm/flatpickr/+esm')
-            .then(m => {
-                const fp = m.default;
-                fp('#check-in',  { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkInParam, disableMobile: true });
-                fp('#check-out', { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkOutParam, disableMobile: true });
-            })
-            .catch(e => console.warn('Flatpickr failed to load:', e));
+        const loadAndInit = () => {
+            if (initialized) return;
+            initialized = true;
+
+            inputIds.forEach(id => {
+                const el = document.querySelector(id);
+                if (el) {
+                    el.removeEventListener('focus', loadAndInit);
+                    el.removeEventListener('click', loadAndInit);
+                    el.removeEventListener('mouseenter', loadAndInit);
+                }
+            });
+
+            import('https://cdn.jsdelivr.net/npm/flatpickr/+esm')
+                .then(m => {
+                    const fp = m.default;
+                    fp('#check-in',  { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkInParam, disableMobile: true });
+                    fp('#check-out', { minDate: 'today', dateFormat: 'Y-m-d', defaultDate: checkOutParam, disableMobile: true });
+
+                    const activeEl = document.activeElement;
+                    if (activeEl && inputIds.includes('#' + activeEl.id)) {
+                        setTimeout(() => activeEl.click(), 50);
+                    }
+                })
+                .catch(e => console.warn('Flatpickr failed to load:', e));
+        };
+
+        inputIds.forEach(id => {
+            const el = document.querySelector(id);
+            if (el) {
+                el.addEventListener('focus', loadAndInit, { passive: true });
+                el.addEventListener('click', loadAndInit, { passive: true });
+                el.addEventListener('mouseenter', loadAndInit, { passive: true });
+            }
+        });
     }
 
     /* ==========================================================================
