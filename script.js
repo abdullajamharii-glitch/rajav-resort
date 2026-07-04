@@ -458,6 +458,83 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+    
+    /* ==========================================================================
+       Dark Mode Toggle Logic
+       ========================================================================== */
+    const brandLogo = document.querySelector('.brand-logo');
+    if (brandLogo && brandLogo.parentNode) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'dark-mode-toggle';
+        toggleBtn.setAttribute('aria-label', 'Toggle Dark Mode');
+        toggleBtn.innerHTML = `
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:18px; height:18px;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        `;
+        
+        // Add style properties
+        toggleBtn.style.background = 'none';
+        toggleBtn.style.border = '1px solid rgba(212, 175, 55, 0.3)';
+        toggleBtn.style.color = 'var(--clr-secondary)';
+        toggleBtn.style.cursor = 'pointer';
+        toggleBtn.style.width = '36px';
+        toggleBtn.style.height = '36px';
+        toggleBtn.style.borderRadius = '50%';
+        toggleBtn.style.display = 'flex';
+        toggleBtn.style.alignItems = 'center';
+        toggleBtn.style.justifyContent = 'center';
+        toggleBtn.style.marginLeft = '1rem';
+        toggleBtn.style.marginRight = '0.5rem';
+        toggleBtn.style.outline = 'none';
+        toggleBtn.style.transition = 'all 0.3s ease';
+        
+        // Insert after logo inside header
+        brandLogo.parentNode.insertBefore(toggleBtn, brandLogo.nextSibling);
+        
+        // Check local storage for theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            toggleBtn.querySelector('.sun-icon').style.display = 'block';
+            toggleBtn.querySelector('.moon-icon').style.display = 'none';
+        }
+        
+        // Toggle theme on click
+        toggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            toggleBtn.querySelector('.sun-icon').style.display = isDark ? 'block' : 'none';
+            toggleBtn.querySelector('.moon-icon').style.display = isDark ? 'none' : 'block';
+        });
+    }
 
+    /* ==========================================================================
+       Testimonials "Read More" Truncation Logic
+       ========================================================================== */
+    const testimonialTexts = document.querySelectorAll('.testimonial-text');
+    testimonialTexts.forEach(p => {
+        const fullHTML = p.innerHTML;
+        const plainText = p.textContent.trim();
+        if (plainText.length > 200) {
+            const truncatedText = plainText.substring(0, 160) + '...';
+            p.textContent = truncatedText;
+            
+            const readMoreBtn = document.createElement('button');
+            readMoreBtn.className = 'read-more-btn';
+            readMoreBtn.textContent = 'Read More';
+            readMoreBtn.style.cssText = 'background:none; border:none; color:var(--clr-secondary); font-weight:600; cursor:pointer; font-size:0.85rem; display:inline-block; margin-top:0.5rem; padding:0; outline:none; text-transform:uppercase; letter-spacing:1px;';
+            
+            readMoreBtn.addEventListener('click', () => {
+                if (readMoreBtn.textContent === 'Read More') {
+                    p.innerHTML = fullHTML;
+                    readMoreBtn.textContent = 'Read Less';
+                } else {
+                    p.textContent = truncatedText;
+                    readMoreBtn.textContent = 'Read More';
+                }
+            });
+            p.parentNode.insertBefore(readMoreBtn, p.nextSibling);
+        }
+    });
 
 });
