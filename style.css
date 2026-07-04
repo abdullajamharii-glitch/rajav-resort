@@ -1713,7 +1713,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .form-row { grid-template-columns: 1fr; }
     
     .hero-title { font-size: 2.2rem; }
-    .hero-subtitle { font-size: 1.1rem; }
+    .hero-subtitle { font-size: 0.85rem; letter-spacing: 3px; }
     .section-title { font-size: 1.8rem; }
 
     /* Fix Availability Widget on Mobile */
@@ -2229,6 +2229,7 @@ body.dark-mode .nav-links a {
 
 body.dark-mode .room-card,
 body.dark-mode .room-card-featured,
+body.dark-mode .suite-content,
 body.dark-mode .amenity-card,
 body.dark-mode .testimonial-card,
 body.dark-mode .faq-card,
@@ -2239,6 +2240,10 @@ body.dark-mode .availability-widget {
     background: #061527 !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
     color: #f0f4f8 !important;
+}
+
+body.dark-mode .room-card-featured {
+    border-color: rgba(212, 175, 55, 0.5) !important;
 }
 
 body.dark-mode .room-name,
