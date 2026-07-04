@@ -2317,3 +2317,65 @@ body.dark-mode .numInputWrapper span {
     border-color: rgba(255,255,255,0.1) !important;
 }
 
+/* ==========================================================================
+   Dark Mode Toggle Element Styling & Layout Positioning
+   ========================================================================== */
+.dark-mode-toggle {
+    background: none;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--clr-secondary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: scale(1.05);
+}
+
+/* Light/Dark mode specific styling for the toggle button border & color */
+body.dark-mode .dark-mode-toggle {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--clr-white);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Layout Order and Placement */
+@media (min-width: 769px) {
+    .brand-logo {
+        order: 1;
+    }
+    .primary-nav {
+        order: 2;
+    }
+    .dark-mode-toggle {
+        order: 3;
+        margin-left: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-logo {
+        order: 1;
+    }
+    .dark-mode-toggle {
+        order: 2;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+    .mobile-menu-toggle {
+        order: 3;
+    }
+}
+
